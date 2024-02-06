@@ -2,23 +2,42 @@
 <html lang="es">
 
 <head>
-
-    <meta http-equiv="refresh" content="50" />
-    <title>Star+ • Kerter+</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="https://kerterplus.com/wp-content/uploads/2023/08/Turquesa-Simple-Libreria-Icono-para-Tienda-Etsy.png">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
     
 
+
+
+    <meta http-equiv="refresh" content="50" />
+    <title> </title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+    
+    
+    
+<script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
+<script type="text/javascript">
+    aclib.runInPagePush({
+        zoneId: '7963682',
+        refreshRate: 30,
+        maxAds: 2,
+    });
+</script>
+
+
+<script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
+<script type="text/javascript">
+    aclib.runPop({
+        zoneId: '7963670',
+    });
+</script>
 
     
     
     
     <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="//teleenvivotv.com/hora.js?v"></script>
-    <meta charset="UTF-4">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
-        content="En Kerter+ podras ver todos los partidos del fútbol argentino y sudamericano. Además, también podrás ver las ligas más importantes de Europa y eventos deportivos como NBA, NHL, MLB, UFC, etc." />
+        content="En tudeportehd podras ver todos los partidos del fútbol argentino y sudamericano. Además, también podrás ver las ligas más importantes de Europa y eventos deportivos como NBA, NHL, MLB, UFC, etc." />
    
     <script type='text/javascript'>
         document.oncontextmenu = function(){return false}
@@ -32,7 +51,7 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
   <style type="text/css">
-    @charset "UTF-4";
+    @charset "UTF-8";
 @import url("src/bootstrap/bootstrap.min.css");
 @import url("src/splide/splide.min.css");
 @import url("https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css");
@@ -43,7 +62,7 @@ body {
   line-height: 1.6rem;
   letter-spacing: 0.004em;
   color: #000000;
-  background: #0c161c;
+  background: #000000;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
@@ -51,6 +70,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
+.appHeader {
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: env(safe-area-inset-top);
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: #000000;
+  color: #000000;
+  border-bottom: 1px solid #000000;
+}
 
 
 
@@ -408,7 +443,6 @@ h5,
 h6 {
   color: #000000;
   margin: 0 0 10px 0;
-  margin-bottom: 20px;
 }
 
 h1 small,
@@ -442,13 +476,11 @@ h1 {
 h2 {
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 20px;
 }
 
 h3 {
   font-size: 17px;
   font-weight: 700;
-  padding-top: 10px;
 }
 
 h4 {
@@ -459,7 +491,6 @@ h4 {
 h5 {
   font-size: 13px;
   font-weight: 500;
-  margin-bottom: 50px;
 }
 
 h6 {
@@ -472,7 +503,7 @@ h6 {
 
 
 .card .card-img-top {
-  border-radius: 12px 12px 0 0;
+  border-radius: 10px 10px 0 0;
 }
 
 
@@ -490,7 +521,7 @@ h6 {
   justify-content: center;
   transition: 0.2s all;
   text-decoration: none !important;
-  border-radius: 8px;
+  border-radius: 10px;
   border-width: 2px;
 }
 
@@ -498,7 +529,7 @@ h6 {
 
 
 .bg-primary {
-  background: #0c161c !important;
+  background: #161129 !important;
   color: #FFF;
 }
 
@@ -516,8 +547,7 @@ body.dark-mode h6 {
 
 
 body.dark-mode .card {
-  background: #242d33;
-  border-radius: 12px;
+  background: #161129;
 }
 
 
@@ -537,7 +567,17 @@ body.dark-mode .card {
   height: 400px;
 }
 
+.container::-webkit-scrollbar {
+  width: 10px;
+}
 
+.container::-webkit-scrollbar-track {
+  background-color: #F5F5F5;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #000000;
+}
 .anuncio-dmca {
   background-color: #ffffff;
   border-radius: 20px;
@@ -563,14 +603,13 @@ body.dark-mode .card {
 
 /* Efecto cuando se pasa el mouse */
 .mycard:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
 }
 
 /* Estilos de la tarjeta */
 .card {
   /* Añade estilos aquí */
   position: relative;
-  margin-bottom: 20px;
 }
 
 .card:hover img {
@@ -628,21 +667,29 @@ img[src="/img/logo-starplus.png"]:hover::before {
       
        <div class="w3-main w3-content w3-padding" style="max-width:1300px;margin-top:90px">
             <!-- App Header -->
+            <div class="appHeader bg-primary text-light">
+                <div class="pageTitle">
+                    <div class="left">
+                    </div>
+                    <a href="/"><img src="https://lh3.googleusercontent.com/-ice1Je46dDI/ZaIHJjMlO5I/AAAAAAAAA2A/vlhOZiXOCH846HjEph0XrtPiVFnIVseDACNcBGAsYHQ/h156/Picsart_24-01-13_00-43-33-665.png" alt="TuDeporteHD"
+                            style="width:180px;height:40px;"></a>
+                </div>
+            </div>
 
             </div>
          
             <center>
                 <img src="https://i.ibb.co/8dqT0G6/image.png" alt="Star+" width="250" height="100">
-                <h2>Elige tu evento favorito:</h2>
+                <h2>Elige el evento:</h2>
             </center>
-
+            <h6>Click en la opción para ver el partido..</h6>
 
 <script>
 function eventos() {
                     var x = Math.random().toString(36).substring(7);
 
                     $.ajax({
-                        url: "https://corsproxy.io/?url=https://deportestvhd.com/star.json?" + x,
+                        url: "https://corsproxy.io/?url=https://deportestvhd2.com/star.json?" + x,
                         type: "get",
                         success: function (arr) {
                             var content = '';
@@ -653,23 +700,23 @@ function eventos() {
                                     let nurl =  url.replace("/embed/eventos/?r=", "");
                                     nurl = atob(nurl);
                                     let wurl = nurl.replace("https://talwan.makeup/star.php?get=", "");
-                                    wurl = "/reproductorstar+.html?get=" + wurl;
+                                    wurl = "https://tudeportehd.com/reproductorstar+.html?get=" + wurl;
                                     let furl = btoa(wurl);
                                      console.log(furl);
                                     //console.log('Link está listo: ' + furl);
                                     // Concatenamos link ya tratado
-                                    url = "/eventos.html?r=" + furl;
+                                    url = "https://tudeportehd.com/eventos.html?r=" + furl;
                                 } else {
                                     //console.log('Link no está listo: ' + url);
                                 }
                                 status = obj['status'];
                                 if (status == "EN VIVO") {    
-                                 hora = '<button type="button" class="btn btn-danger me-1 mb-1">En Vivo</button>';
+                                 hora = '<button type="button" class="btn btn-danger me-1 mb-1">EN VIVO</button>';
                                  
                                 } else if (status == "FINALIZADO") {
-                                    hora = '<button type="button" class="btn btn-white me-1 mb-1">Finalizado</button>';
+                                    hora = '<button type="button" class="btn btn-white me-1 mb-1">FINALIZADO</button>';
                                 } else {
-                                    hora = '<button type="button" class="btn btn-white me-1 mb-1">Hoy |  <span class="t">' + status + '</span> hs</button>';
+                                    hora = '<button type="button" class="btn btn-white me-1 mb-1">HOY | <span class="t">' + status + '</span> hs</button>';
                                 }
                                 //console.log(status);
                                 content += '<div class="col-md-3 col-lg-4 mycard"><div class="no-section no-mt-2"><a href="' + url + '"><div class="card"><img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/star/' + obj['img'] + '/scale?width=500&aspectRatio=1.78&format=jpeg" class="card-img-top" alt="image" /><div class="card-body">' + hora + '<h3>' + obj['title'] + '</h3><h5 class="card-subtitle">' + obj['league'] + '</h5></div></div></a></div></div>';
@@ -692,9 +739,11 @@ function eventos() {
         </div>
     </div>
     <hr>
+    <div class="sharethis-inline-share-buttons"></div>
     <center>
         <center>
             <hr>
+            <h5>TuDeporte HD &copy; Todos los derechos reservados.</h5>
             
             </a>
         </center>
