@@ -651,12 +651,12 @@ function eventos() {
                                     let nurl =  url.replace("/embed/eventos/?r=", "");
                                     nurl = atob(nurl);
                                     let wurl = nurl.replace("https://talwan.makeup/star.php?get=", "");
-                                    window.open wurl = "/reproductorstar+.html?get=https://slowdus.herokuapp.com/" + wurl;
+                                    wurl = "/reproductorstar+.html?get=https://slowdus.herokuapp.com/" + wurl;
                                     let furl = btoa(wurl);
                                      console.log(furl);
                                     //console.log('Link está listo: ' + furl);
                                     // Concatenamos link ya tratado
-                                    url = "/eventos.html?r=" + furl;
+                                    target="_blank url = "/eventos.html?r=" + furl;
                                 } else {
                                     //console.log('Link no está listo: ' + url);
                                 }
