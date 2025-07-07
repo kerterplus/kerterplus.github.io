@@ -1,15 +1,15 @@
 [
   {
-    "title": "Real Madrid vs Barcelona",
-    "fecha": "06/07/2025",
-    "league": "LaLiga",
-    "img": "https://example.com/imgs/real-barca.jpg",
-    "url": "https://videos.example.com/real-vs-barca"
+    "title": "Real Madrid vs. Borussia Dortmund",
+    "fecha": "05/07/2025",
+    "league": "Copa Mundial de Clubes de la FIFA",
+    "img": "https://image.discovery.indazn.com/ca/v2/ca/image?id=3jqoc0stgfgh86i9cg5wbszm4_image-header_pUs_1751541733000&quality=70",
+    "url": "//ok.ru/videoembed/9625071782598?nochat=1&autoplay=1"
   },
   {
-    "title": "Argentina vs Brasil",
+    "title": "PSG vs. Bayern Munich",
     "fecha": "05/07/2025",
-    "league": "Copa América",
+    "league": "Copa Mundial de Clubes de la FIFA",
     "img": "https://example.com/imgs/arg-bra.jpg",
     "url": [
       {
@@ -19,29 +19,6 @@
       {
         "label": "Opción 2",
         "url": "https://videos.example.com/arg-bra-2"
-      }
-    ]
-  },
-  {
-    "title": "Manchester City vs Liverpool",
-    "fecha": "04/07/2025",
-    "league": "Premier League",
-    "img": "https://example.com/imgs/mci-liv.jpg",
-    "url": "https://videos.example.com/mci-vs-liv"
-  },
-  {
-    "title": "Francia vs Alemania",
-    "fecha": "03/07/2025",
-    "league": "Eurocopa",
-    "img": "https://example.com/imgs/fra-ger.jpg",
-    "url": [
-      {
-        "label": "HD",
-        "url": "https://videos.example.com/fra-ger-hd"
-      },
-      {
-        "label": "SD",
-        "url": "https://videos.example.com/fra-ger-sd"
       }
     ]
   }
