@@ -1,0 +1,24 @@
+[
+  {
+    "hora": "16:10",
+    "liga": "MLB",
+    "local": "Houston Astros",
+    "visitante": "Los Angeles Dodgers",
+    "logoLocal": "https://upload.wikimedia.org/wikipedia/en/6/60/Houston_Astros_logo.svg",
+    "logoVisitante": "https://upload.wikimedia.org/wikipedia/en/0/0e/Los_Angeles_Dodgers_Logo.svg",
+    "canales": [
+      { "nombre": "iPhone", "url": "#" }
+    ]
+  },
+  {
+    "hora": "16:30",
+    "liga": "NBA",
+    "local": "Los Angeles Lakers",
+    "visitante": "Miami Heat",
+    "logoLocal": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Los_Angeles_Lakers_logo.svg",
+    "logoVisitante": "https://upload.wikimedia.org/wikipedia/en/f/fb/Miami_Heat_logo.svg",
+    "canales": [
+      { "nombre": "Kerter+ 2", "url": "#" }
+    ]
+  }
+]
