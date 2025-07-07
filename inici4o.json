@@ -3,7 +3,7 @@
     "hora": "15:45",
     "liga": "UEFA Champions League",
     "partido": "Real Madrid vs. FC Barcelona",
-    "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Estadio_Santiago_Bernab%C3%A9u_2014.jpg/640px-Estadio_Santiago_Bernab%C3%A9u_2014.jpg",
+    "imagen": "https://image.discovery.indazn.com/ca/v2/ca/image?id=3jqoc0stgfgh86i9cg5wbszm4_image-header_pUs_1751541733000&quality=70",
     "canales": [
       { "nombre": "ESPN", "url": "https://espn.com" },
       { "nombre": "Star+", "url": "https://starplus.com" }
@@ -13,7 +13,7 @@
     "hora": "17:00",
     "liga": "Premier League",
     "partido": "Manchester City vs. Arsenal",
-    "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Etihad_Stadium.jpg/640px-Etihad_Stadium.jpg",
+    "imagen": "https://image.discovery.indazn.com/ca/v2/ca/image?id=6zprjgneza8qknipkigfvkxme_image-header_pRow_1751294607000&quality=70",
     "canales": [
       { "nombre": "Sky Sports", "url": "https://skysports.com" }
     ]
