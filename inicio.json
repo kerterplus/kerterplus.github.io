@@ -1,24 +1,22 @@
 [
   {
-    "hora": "16:10",
-    "liga": "MLB",
-    "local": "PSG",
-    "visitante": "Bayern Munich",
-    "logoLocal": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
-    "logoVisitante": "https://a.espncdn.com/i/teamlogos/soccer/500/20103.png",
+    "hora": "15:45",
+    "liga": "UEFA Champions League",
+    "partido": "Real Madrid vs. FC Barcelona",
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Estadio_Santiago_Bernab%C3%A9u_2014.jpg/640px-Estadio_Santiago_Bernab%C3%A9u_2014.jpg",
     "canales": [
-      { "nombre": "iPhone", "url": "#" }
+      { "nombre": "ESPN", "url": "https://espn.com" },
+      { "nombre": "Star+", "url": "https://starplus.com" }
     ]
   },
   {
-    "hora": "16:30",
-    "liga": "NBA",
-    "local": "Los Angeles Lakers",
-    "visitante": "Miami Heat",
-    "logoLocal": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Los_Angeles_Lakers_logo.svg",
-    "logoVisitante": "https://upload.wikimedia.org/wikipedia/en/f/fb/Miami_Heat_logo.svg",
+    "hora": "17:00",
+    "liga": "Premier League",
+    "partido": "Manchester City vs. Arsenal",
+    "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Etihad_Stadium.jpg/640px-Etihad_Stadium.jpg",
     "canales": [
-      { "nombre": "Kerter+ 2", "url": "#" }
+      { "nombre": "Sky Sports", "url": "https://skysports.com" }
     ]
   }
 ]
+
