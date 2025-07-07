@@ -2,10 +2,10 @@
   {
     "hora": "16:10",
     "liga": "MLB",
-    "local": "Houston Astros",
-    "visitante": "Los Angeles Dodgers",
-    "logoLocal": "https://upload.wikimedia.org/wikipedia/en/6/60/Houston_Astros_logo.svg",
-    "logoVisitante": "https://upload.wikimedia.org/wikipedia/en/0/0e/Los_Angeles_Dodgers_Logo.svg",
+    "local": "PSG",
+    "visitante": "Bayern Munich",
+    "logoLocal": "https://a.espncdn.com/i/teamlogos/soccer/500/160.png",
+    "logoVisitante": "https://a.espncdn.com/i/teamlogos/soccer/500/20103.png",
     "canales": [
       { "nombre": "iPhone", "url": "#" }
     ]
