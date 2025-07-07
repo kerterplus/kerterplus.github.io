@@ -1,0 +1,48 @@
+[
+  {
+    "title": "Real Madrid vs Barcelona",
+    "fecha": "06/07/2025",
+    "league": "LaLiga",
+    "img": "https://example.com/imgs/real-barca.jpg",
+    "url": "https://videos.example.com/real-vs-barca"
+  },
+  {
+    "title": "Argentina vs Brasil",
+    "fecha": "05/07/2025",
+    "league": "Copa América",
+    "img": "https://example.com/imgs/arg-bra.jpg",
+    "url": [
+      {
+        "label": "Opción 1",
+        "url": "https://videos.example.com/arg-bra-1"
+      },
+      {
+        "label": "Opción 2",
+        "url": "https://videos.example.com/arg-bra-2"
+      }
+    ]
+  },
+  {
+    "title": "Manchester City vs Liverpool",
+    "fecha": "04/07/2025",
+    "league": "Premier League",
+    "img": "https://example.com/imgs/mci-liv.jpg",
+    "url": "https://videos.example.com/mci-vs-liv"
+  },
+  {
+    "title": "Francia vs Alemania",
+    "fecha": "03/07/2025",
+    "league": "Eurocopa",
+    "img": "https://example.com/imgs/fra-ger.jpg",
+    "url": [
+      {
+        "label": "HD",
+        "url": "https://videos.example.com/fra-ger-hd"
+      },
+      {
+        "label": "SD",
+        "url": "https://videos.example.com/fra-ger-sd"
+      }
+    ]
+  }
+]
