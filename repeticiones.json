@@ -10,16 +10,7 @@
     "title": "PSG vs. Bayern Munich",
     "fecha": "05/07/2025",
     "league": "Copa Mundial de Clubes de la FIFA",
-    "img": "https://example.com/imgs/arg-bra.jpg",
-    "url": [
-      {
-        "label": "Opción 1",
-        "url": "https://videos.example.com/arg-bra-1"
-      },
-      {
-        "label": "Opción 2",
-        "url": "https://videos.example.com/arg-bra-2"
-      }
-    ]
+    "img": "https://image.discovery.indazn.com/ca/v2/ca/image?id=6zprjgneza8qknipkigfvkxme_image-header_pRow_1751294607000&quality=70",
+    "url": "//ok.ru/videoembed/9625143806662?nochat=1&autoplay=1"
   }
 ]
