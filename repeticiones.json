@@ -1,5 +1,14 @@
 [
    {
+    "title": "WSG Tirol vs. Real Madrid",
+    "fecha": "12/08/2025",
+    "league": "Amistoso",
+    "img": "https://screenplus.fr/wp-content/uploads/2025/08/Real-Madrid-WSG-Tirol-EN-DIRECT-et-GRATUIT-sur-DAZN.png",
+    "url": [
+          { label: "Primer Tiempo", url: "https://kerterplus.github.io/play1.html" },
+          { label: "Segundo Tiempo", url: "" }
+        ]
+   {
     "title": "Barcelona vs. Como",
     "fecha": "10/08/2025",
     "league": "Trofeo Johan Gamper",
