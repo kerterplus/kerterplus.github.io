@@ -1,130 +1,161 @@
-<!doctype html>
-<html lang="es">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
-  <title>JW iOS Player</title>
-
-  <!-- JW PLAYER: Reemplaza por tu librería -->
-  <script src="https://cdn.jwplayer.com/libraries/XXXXXXXX.js"></script>
-
   <style>
-    :root{
-      --bg: #0b0e12;
-      --accent: #4da3ff;
-      --text: #ffffff;
-      --glow: 0 10px 30px rgba(77,163,255,.35);
+    /* Oculta controles no deseados */
+    .jw-settings-sharing,
+    .jw-icon-rewind,
+    .jw-icon-pip,
+    .jw-rightclick {
+      display: none !important;
     }
-    html, body {
-      margin: 0;
-      height: 100%;
-      background: var(--bg);
-    }
-    .wrap {
-      position: fixed;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      background: var(--bg);
-    }
-    .player-shell {
-      position: relative;
+
+    /* Contenedor del reproductor */
+    #player-container {
       width: 100%;
-      height: 100%;
+      aspect-ratio: 16 / 9;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.08), rgba(0,0,0,0.6));
     }
+
+    /* Contenedor de JW */
     #player {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
+      z-index: 1;
     }
-    /* Overlay play button */
-    .overlay-play {
+
+    /* Botón estilo Liquid Glass iOS */
+    .play-overlay {
       position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      z-index: 5;
-      background: rgba(0,0,0,.35);
-      transition: opacity .25s ease;
-    }
-    .overlay-play.hidden { opacity: 0; pointer-events: none; }
-    .play-btn {
-      width: 80px; height: 80px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.15);
-      border: 1px solid rgba(255,255,255,.3);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: var(--glow);
-      display: flex; align-items: center; justify-content: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 18px 34px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: white;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4),
+                  inset 0 -1px 2px rgba(0, 0, 0, 0.25),
+                  0 6px 30px rgba(0, 0, 0, 0.4);
+      transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+      z-index: 2;
       cursor: pointer;
     }
+
+    /* Ícono Play */
     .play-icon {
-      width: 0; height: 0;
-      border-top: 14px solid transparent;
-      border-bottom: 14px solid transparent;
-      border-left: 20px solid var(--text);
-      margin-left: 4px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 12px 0 12px 20px;
+      border-color: transparent transparent transparent white;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,0.6));
+    }
+
+    .play-overlay:hover {
+      transform: translate(-50%, -50%) scale(1.07);
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5),
+                  0 8px 35px rgba(0, 0, 0, 0.5),
+                  0 0 25px rgba(255,255,255,0.4);
+    }
+
+    /* Preloader circular */
+    .preloader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                  0 4px 20px rgba(0, 0, 0, 0.3);
+      z-index: 2;
+    }
+
+    .preloader::before {
+      content: "";
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255, 255, 255, 0.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="player-shell" id="shell">
-      <div id="player"></div>
-      <div class="overlay-play" id="overlay">
-        <div class="play-btn" id="playBtn"><span class="play-icon"></span></div>
-      </div>
+  <div id="player-container">
+    <div id="player"></div>
+    <div class="play-overlay" id="play-button">
+      <div class="play-icon"></div>
+      Play
     </div>
+    <div class="preloader" id="preloader"></div>
   </div>
 
+  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
   <script>
-    // URL de prueba que funciona en iPhone
-    const STREAM_URL = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
+    jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
 
-    const overlay = document.getElementById('overlay');
-    const playBtn = document.getElementById('playBtn');
+    document.getElementById("play-button").addEventListener("click", function () {
+      this.style.display = 'none';
+      document.getElementById("preloader").style.display = 'flex';
 
-    // Inicializa JW Player
-    const player = jwplayer("player").setup({
-      file: STREAM_URL,
-      type: "hls",
-      primary: "html5",
-      autostart: false,
-      stretching: "uniform",
-      width: "100%",
-      height: "100%",
-      controls: true
-    });
-
-    function hideOverlay() {
-      overlay.classList.add("hidden");
-    }
-    function showOverlay() {
-      overlay.classList.remove("hidden");
-    }
-
-    // Evento del botón de reproducción
-    playBtn.addEventListener("click", () => {
-      hideOverlay();
-      // Reproducir directamente en el toque
-      player.play().catch(() => {
-        showOverlay();
+      const playerInstance = jwplayer("player");
+      playerInstance.setup({
+        playlist: [{
+          sources: [{
+            type: "hls",
+            file: "https://fast.wistia.com/embed/medias/2tze7dcvg1.m3u8" // tu m3u8 aquí
+          }]
+        }],
+        logo: { file: "https://kerterplus.com/wp-content/uploads/2023/09/Diseno-sin-titulo-60.png", position: 'bottom-right' },
+        width: "100%",
+        height: "100%",
+        aspectratio: "16:9",
+        autostart: true
       });
-    });
 
-    // Ocultar overlay al reproducir
-    player.on("play", hideOverlay);
+      playerInstance.on('ready', function () {
+        document.getElementById("preloader").style.display = 'none';
+      });
 
-    // Mostrar overlay al pausar o terminar
-    player.on("pause", showOverlay);
-    player.on("complete", showOverlay);
+      playerInstance.on('error', function (e) {
+        document.getElementById("preloader").style.display = 'none';
+        alert("Error de reproducción: " + e.message);
+      });
 
-    // Manejar errores
-    player.on("error", (e) => {
-      console.error("Error JW:", e);
-      showOverlay();
+      playerInstance.on('playAttemptFailed', function () {
+        document.getElementById("preloader").style.display = 'none';
+      });
     });
   </script>
 </body>
