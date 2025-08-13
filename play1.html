@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"
+  />
+  <title>Player iOS Style • JW + HLS</title>
+
+  <!-- JW PLAYER: Reemplaza ESTA URL por tu librería oficial -->
+  <script src="https://cdn.jwplayer.com/libraries/XXXXXXXX.js"></script>
+
+  <style>
+    :root{
+      --bg: #0b0e12;
+      --card: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.12);
+      --text: #eaf0f6;
+      --muted: #a8b3c2;
+      --accent: #4da3ff;
+      --glow: 0 10px 30px rgba(77,163,255,.35);
+      --radius-xl: 20px;
+      --radius-2xl: 28px;
+    }
+
+    /* Reset y layout full viewport (perfecto para iframe) */
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro", "Inter", "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    .wrap {
+      position: fixed;
+      inset: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(1200px 700px at 80% -10%, rgba(77,163,255,.12), transparent 60%),
+        radial-gradient(1000px 600px at 10% 110%, rgba(108,92,231,.12), transparent 60%),
+        var(--bg);
+    }
+
+    /* Contenedor “tarjeta” con glass look y borde suave */
+    .player-shell{
+      width: min(100vw, 1100px);
+      height: min(100vh, 1000px);
+      aspect-ratio: 16/9;
+      max-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+      border-radius: var(--radius-2xl);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid var(--stroke);
+      box-shadow: 0 8px 24px rgba(0,0,0,.38), var(--glow);
+    }
+
+    /* Barra superior estilo iOS (pill) */
+    .topbar{
+      position: absolute;
+      z-index: 5;
+      left: 16px; right: 16px; top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(15,18,24,.55);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      pointer-events: none;
+    }
+    .pill{
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 12px; border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      font-weight: 600; font-size: 12px; letter-spacing: .2px;
+      color: var(--text);
+    }
+    .pill .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: #47ff9a; box-shadow: 0 0 16px rgba(71,255,154,.8);
+    }
+    .pill.muted { color: var(--muted); }
+
+    /* Contenedor JW */
+    #player {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      overflow: hidden;
+    }
+
+    /* Capa de “big play” personalizada (sobre JW) */
+    .overlay-play{
+      position: absolute; inset: 0; z-index: 4;
+      display: grid; place-items: center;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+    .play-btn{
+      pointer-events: auto;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      display:flex; align-items:center; justify-content:center;
+      width: 86px; height: 86px; border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,.16));
+      border: 1px solid rgba(255,255,255,.22);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 10px 26px rgba(0,0,0,.35), var(--glow);
+      cursor: pointer;
+      transition: transform .18s ease, opacity .2s ease;
+    }
+    .play-btn:active{ transform: scale(.98); }
+    .play-icon{
+      width: 0; height: 0;
+      border-top: 14px solid transparent;
+      border-bottom: 14px solid transparent;
+      border-left: 20px solid var(--text);
+      margin-left: 4px;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,.4));
+    }
+
+    /* Estado oculto de overlay */
+    .overlay-play.hidden{ opacity: 0; visibility: hidden; }
+
+    /* Pulido del skin de JW (clases v8) */
+    .jwplayer.jw-skin-seven .jw-controlbar,
+    .jwplayer .jw-controlbar {
+      background: linear-gradient(180deg, rgba(15,18,24,.78), rgba(10,12,16,.78)) !important;
+      border-top: 1px solid rgba(255,255,255,.12);
+      height: 52px !important;
+      padding: 0 10px !important;
+    }
+    .jwplayer .jw-text,
+    .jwplayer .jw-icon,
+    .jwplayer .jw-slider-time,
+    .jwplayer .jw-slider-volume {
+      color: var(--text) !important;
+      text-shadow: none !important;
+    }
+    .jwplayer .jw-button-color{ color: var(--text) !important; }
+    .jwplayer .jw-progress { background: var(--accent) !important; }
+    .jwplayer .jw-knob { background: #fff !important; }
+    .jwplayer .jw-rail { background: rgba(255,255,255,.2) !important; }
+    .jwplayer .jw-tooltip,
+    .jwplayer .jw-settings-menu {
+      background: rgba(19,22,28,.92) !important;
+      border: 1px solid rgba(255,255,255,.12) !important;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .jwplayer .jw-settings-topbar{ border-bottom: 1px solid rgba(255,255,255,.12)!important; }
+    .jwplayer .jw-icon-inline.jw-button-color:hover{ filter: drop-shadow(0 6px 18px rgba(77,163,255,.42)); }
+
+    /* Oculta botones que no quieres (ajusta a gusto) */
+    .jw-rightclick,
+    .jw-icon-pip,
+    .jw-icon-rewind,
+    .jw-icon-cc,
+    .jw-icon-audio-tracks,
+    .jw-settings-sharing { display: none !important; }
+
+    /* Errores */
+    .error-banner{
+      position: absolute; z-index: 6;
+      left: 16px; right: 16px; bottom: 16px;
+      padding: 14px 16px; border-radius: 14px;
+      background: rgba(255,77,77,.14);
+      color: #ffdede;
+      border: 1px solid rgba(255,77,77,.35);
+      font-size: 14px; line-height: 1.3;
+      display: none;
+    }
+
+    /* Modo “fill” total si lo metes en un iframe responsivo */
+    .force-fill{
+      position: fixed !important; inset: 0 !important; width: 100vw !important; height: 100vh !important;
+      border-radius: 0 !important; box-shadow: none !important; border: 0 !important;
+    }
+
+    /* iOS notch spacing refinado */
+    @supports (padding: max(0px)) {
+      .topbar { padding-left: max(14px, env(safe-area-inset-left)); padding-right: max(14px, env(safe-area-inset-right)); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="player-shell" id="shell">
+      <div class="topbar" id="topbar">
+        <div class="pill"><span class="dot"></span> Live HLS</div>
+        <div class="pill muted" id="statusPill">Listo para reproducir</div>
+      </div>
+
+      <div id="player"></div>
+
+      <div class="overlay-play" id="overlay">
+        <button class="play-btn" id="playBtn" aria-label="Reproducir">
+          <span class="play-icon"></span>
+        </button>
+      </div>
+
+      <div class="error-banner" id="errorBanner"></div>
+    </div>
+  </div>
+
+  <script>
+    // ======= CONFIG BÁSICA =======
+    const STREAM_URL = "https://fast.wistia.com/embed/medias/yhu6z8icfp.m3u8"; // tu m3u8
+    const POSTER = ""; // opcional: URL de poster si tienes
+    const AUTOFULLSCREEN_ON_PLAY = true; // Forzar fullscreen al tocar play (bueno en iPhone)
+
+    // Si quieres que SIEMPRE llene la pantalla aunque esté dentro de un iframe
+    // activa la clase:
+    // document.getElementById('shell').classList.add('force-fill');
+
+    const overlay = document.getElementById('overlay');
+    const playBtn = document.getElementById('playBtn');
+    const errorBanner = document.getElementById('errorBanner');
+    const statusPill = document.getElementById('statusPill');
+
+    // Utilidad: mostrar errores elegantes
+    function showError(msg){
+      errorBanner.textContent = msg || "No se pudo reproducir el contenido.";
+      errorBanner.style.display = "block";
+      statusPill.textContent = "Error al cargar";
+    }
+
+    // JW Setup
+    const player = jwplayer("player").setup({
+      file: STREAM_URL,
+      type: "hls",
+      primary: "html5",
+      autostart: false,              // iOS requiere gesto del usuario si hay audio
+      mute: false,                   // si quieres intentar autostart, usa true + autostart:'viewable'
+      abouttext: "Kerter+ Player",
+      aboutlink: "https://kerterplus.example", // opcional
+      stretching: "uniform",         // 'uniform' o 'fill'
+      width: "100%",
+      height: "100%",
+      image: POSTER || undefined,
+      cast: { enabled: true },       // AirPlay/Chromecast (iOS soporta AirPlay nativo)
+      playbackRateControls: [0.75, 1, 1.25, 1.5],
+      skin: { name: "" },            // usamos nuestra capa CSS
+      controls: true,
+      repeat: false,
+      // Para que el selector de calidad aparezca si la playlist lo ofrece
+      hlsjsdefault: true
+    });
+
+    // Manejo de UI y estados
+    function hideOverlay(){ overlay.classList.add("hidden"); }
+    function showOverlay(){ overlay.classList.remove("hidden"); }
+
+    // Tap en botón grande
+    playBtn.addEventListener("click", async () => {
+      try{
+        statusPill.textContent = "Reproduciendo…";
+        hideOverlay();
+
+        // iOS fullscreen opcional
+        if (AUTOFULLSCREEN_ON_PLAY) {
+          try { player.setFullscreen(true); } catch(e){}
+        }
+        await player.play();
+      }catch(err){
+        showError("Toca de nuevo para iniciar. iOS puede requerir interacción.");
+        showOverlay();
+      }
+    });
+
+    // Eventos de JW para robustez
+    player.on("ready", () => {
+      statusPill.textContent = "Listo • toca para reproducir";
+      // iOS inline playback
+      try {
+        const el = player.getContainer().querySelector("video");
+        if (el){
+          el.setAttribute("playsinline","true");
+          el.setAttribute("webkit-playsinline","true");
+        }
+      } catch(e){}
+    });
+
+    player.on("play", () => {
+      statusPill.textContent = "Reproduciendo";
+      hideOverlay();
+    });
+
+    player.on("pause", () => {
+      statusPill.textContent = "Pausado";
+      showOverlay();
+    });
+
+    player.on("complete", () => {
+      statusPill.textContent = "Finalizado";
+      showOverlay();
+    });
+
+    player.on("error", (e) => {
+      console.error("JW Error:", e);
+      showError(e && e.message ? e.message : "Error desconocido del reproductor.");
+      showOverlay();
+    });
+
+    // Prevenir zoom accidental en iOS al tocar dos veces
+    document.addEventListener("gesturestart", (e) => e.preventDefault());
+
+    // Ajuste orientación: al pasar a landscape en iPhone, intentar fullscreen
+    window.addEventListener("orientationchange", () => {
+      if (Math.abs(window.orientation) === 90) {
+        try { player.setFullscreen(true); } catch(e){}
+      }
+    });
+
+    // Fallback rápido si JW no inicializa
+    setTimeout(() => {
+      if (!player || !player.getState) return;
+      try {
+        player.getState(); // si falla, no está OK
+      } catch (e) {
+        showError("No se pudo inicializar JW Player. Verifica tu librería y licencia.");
+      }
+    }, 2000);
+  </script>
+</body>
+</html>
