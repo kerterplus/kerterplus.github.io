@@ -80,7 +80,9 @@
   </div>
 
   <script>
-    const STREAM_URL = "https://fast.wistia.com/embed/medias/yhu6z8icfp.m3u8";
+    // URL de prueba que funciona en iPhone
+    const STREAM_URL = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
+
     const overlay = document.getElementById('overlay');
     const playBtn = document.getElementById('playBtn');
 
@@ -106,9 +108,8 @@
     // Evento del botón de reproducción
     playBtn.addEventListener("click", () => {
       hideOverlay();
-      // Intenta reproducir directamente
+      // Reproducir directamente en el toque
       player.play().catch(() => {
-        // Si falla, vuelve a mostrar overlay
         showOverlay();
       });
     });
@@ -116,7 +117,7 @@
     // Ocultar overlay al reproducir
     player.on("play", hideOverlay);
 
-    // Mostrar overlay al pausar o al terminar
+    // Mostrar overlay al pausar o terminar
     player.on("pause", showOverlay);
     player.on("complete", showOverlay);
 
