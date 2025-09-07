@@ -2,197 +2,81 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <title>Player</title>
   <style>
-    /* Oculta controles no deseados */
-    .jw-settings-sharing,
-    .jw-icon-rewind,
-    .jw-icon-pip,
-    .jw-rightclick {
-      display: none !important;
-    }
-
+    body { margin:0; background:#000; }
     #player-container {
       width: 100%;
-      position: relative;
-      overflow: hidden;
+      height: 100vh;
       background: #000;
     }
-    #player-container::before {
-      content: "";
-      display: block;
-      padding-top: 56.25%; /* 16:9 */
-    }
-
-    #poster-img, #player {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Botón Play estilo iOS */
-    .play-overlay {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 18px 34px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Roboto, sans-serif;
-      font-size: 20px;
-      font-weight: 600;
-      color: white;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4),
-                  inset 0 1px 0 rgba(255,255,255,0.3);
-      cursor: pointer;
-      z-index: 3;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .play-overlay:hover {
-      transform: translate(-50%, -50%) scale(1.05);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.5),
-                  inset 0 1px 0 rgba(255,255,255,0.4);
-    }
-    .play-overlay:active {
-      transform: translate(-50%, -50%) scale(0.95);
-    }
-
-    .play-icon {
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 14px 0 14px 24px;
-      border-color: transparent transparent transparent white;
-      filter: drop-shadow(0 0 6px rgba(255,255,255,0.6));
-    }
-
-    /* Loader circular estilo iOS */
-    .preloader {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      display: none; /* 👈 Oculto por defecto */
-      width: 60px;
-      height: 60px;
-      border: 4px solid rgba(255, 255, 255, 0.3);
-      border-top: 4px solid #fff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      z-index: 4;
-    }
-
-    @keyframes spin {
-      to { transform: translate(-50%, -50%) rotate(360deg); }
-    }
   </style>
+  <script src="//ssl.p.jwpcdn.com/player/v/8.26.0/jwplayer.js"></script>
+  <script>jwplayer.key = "XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo";</script>
 </head>
 <body>
   <div id="player-container">
-    <img id="poster-img" src="" alt="Poster">
     <div id="player"></div>
-    <div class="play-overlay" id="play-button">
-      <div class="play-icon"></div>
-      Reproducir
-    </div>
-    <div class="preloader" id="preloader"></div>
   </div>
 
-  <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
   <script>
-    jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
-
-    // Lista de canales
-    const channels = {
-      "SSC1": {
-        url: "https://ssc-1-enc.edgenextcdn.net/out/v1/c696e4819b55414388a1a487e8a45ca1/index.mpd",
-        k1: "d84c325f36814f39bbe59080272b10c3",
-        k2: "550727de4c96ef1ecff874905493580f",
-        poster: "https://kerterplus.com/wp-content/uploads/2024/05/UK-19.png.webp"
-      },
-      "SSC2": {
-        url: "https://ssc2-ak.akamaized.net/out/v1/a16db2ec338a445a82d9c541cc9293f9/index.mpd",
-        k1: "8BCFC55359E24BD7AD1C5560A96DDD3C",
-        k2: "b5dcf721ab522af92a9d3bf0bd55b596",
-        poster: "https://kerterplus.com/wp-content/uploads/2024/05/UK-19.png.webp"
-      },
+    // Canales
+    const ConfiguracionCanales = {
       "FS2US": {
         url: "https://otte.live.fly.ww.aiv-cdn.net/iad-nitro/live/clients/dash/enc/awxnrqkbo5/out/v1/716529a4091947b0877e6cb80dbd6ccb/cenc.mpd",
         k1: "09453ce820d65fbc675de3185f9e454c",
-        k2: "98cff9600995fa381c76fdacf3c7edae",
-        poster: "https://kerterplus.com/wp-content/uploads/2023/09/Diseno-sin-titulo-60.png"
+        k2: "98cff9600995fa381c76fdacf3c7edae"
+      },
+      "SSC1": {
+        url: "https://ssc-1-enc.edgenextcdn.net/out/v1/c696e4819b55414388a1a487e8a45ca1/index.mpd",
+        k1: "d84c325f36814f39bbe59080272b10c3",
+        k2: "550727de4c96ef1ecff874905493580f"
       }
+      // 🔥 Aquí puedes seguir metiendo los demás
     };
 
-    // Obtener canal por ?id=
-    const urlParams = new URLSearchParams(window.location.search);
-    const channelId = urlParams.get("id") || "FS2US"; // Default FS2US
-    const channel = channels[channelId];
-
-    if (!channel) {
-      alert("Canal no encontrado");
-    } else {
-      document.getElementById("poster-img").src = channel.poster;
+    // Obtener ?id=FS2US
+    function getParameterByName(name) {
+      name = name.replace(/[\[\]]/g, "\\$&");
+      const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(window.location.href);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
-    function isIOS() {
-      return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    }
+    const id = getParameterByName("id") || "FS2US";
+    const config = ConfiguracionCanales[id];
 
-    document.getElementById("play-button").addEventListener("click", function () {
-      this.style.display = 'none';
-      document.getElementById("poster-img").style.display = 'none';
-      document.getElementById("preloader").style.display = 'block';
+    if (config) {
+      const sources = [];
 
-      var source;
-      if (isIOS()) {
-        source = {
-          type: "hls",
-          file: channel.url.replace(".mpd", ".m3u8") // fallback
-        };
-      } else {
-        source = {
-          default: true,
-          type: "dash",
-          file: channel.url,
-          drm: {
-            clearkey: {
-              keyId: channel.k1,
-              key: channel.k2
-            }
-          }
-        };
+      if (config.url.includes(".m3u8")) {
+        sources.push({ file: config.url });
       }
 
-      var playerInstance = jwplayer("player");
-      playerInstance.setup({
-        playlist: [{ sources: [source] }],
-        logo: { file: "https://kerterplus.com/wp-content/uploads/2023/09/Diseno-sin-titulo-60.png", position: 'bottom-right' },
+      if (config.url.includes(".mpd") && config.k1 && config.k2) {
+        sources.push({
+          file: config.url,
+          drm: {
+            clearkey: { keyId: config.k1, key: config.k2 }
+          }
+        });
+      }
+
+      jwplayer("player").setup({
+        playlist: [{
+          title: id,
+          sources: sources
+        }],
+        autostart: true,
         width: "100%",
         height: "100%",
-        aspectratio: "16:9",
-        autostart: true
+        aspectratio: "16:9"
       });
-
-      playerInstance.on('ready', function () {
-        document.getElementById("preloader").style.display = 'none';
-      });
-
-      playerInstance.on('error', function (e) {
-        document.getElementById("preloader").style.display = 'none';
-        alert("Error de reproducción: " + e.message);
-      });
-
-      playerInstance.on('playAttemptFailed', function () {
-        document.getElementById("preloader").style.display = 'none';
-      });
-    });
+    } else {
+      document.getElementById("player").innerHTML = "<p style='color:white'>Canal no encontrado</p>";
+    }
   </script>
 </body>
 </html>
