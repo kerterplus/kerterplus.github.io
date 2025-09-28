@@ -1,21 +1,21 @@
 [
   {
     "nombre": "Ver Ahora",
-    "link": "https://ejemplo.com/evento1",
+    "link": "https://kerterplus.com/kerter-plus/",
     "dispositivo": "apple",
     "inicio": "2025-09-28T16:00:00",
     "fin": "2025-09-28T21:00:00"
   },
   {
     "nombre": "Ver Ahora",
-    "link": "https://ejemplo.com/evento1",
-    "dispositivo": "apple",
+    "link": "https://kerterplus.com/sky-sports-laliga-mx/",
+    "dispositivo": "play",
     "inicio": "2025-09-28T16:00:00",
     "fin": "2025-09-28T21:00:00"
   },
   {
     "nombre": "Ver Ahora",
-    "link": "https://ejemplo.com/evento2",
+    "link": "https://kerterplus.com/setanta-sport-2/",
     "dispositivo": "play",
     "inicio": "2025-09-28T16:00:00",
     "fin": "2025-09-28T21:00:00"
