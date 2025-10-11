@@ -1,28 +1,27 @@
-{
-  "peliculas": [
-    {
-      "titulo": "LALIGA: Más allá del gol",
-      "anyo": 2024,
-      "generos": ["Deportivo", "Documental"],
-      "edad": "13+",
-      "imagen": "https://kerterplus.com/wp-content/uploads/2024/07/Diseno-sin-titulo-68.png",
-      "url": "https://kerterplus.com/laliga-mas-alla-del-gol/"
-    },
-    {
-      "titulo": "Otra Película",
-      "anyo": 2023,
-      "generos": ["Drama", "Biografía"],
-      "edad": "16+",
-      "imagen": "https://ruta-a-imagen-2.jpg",
-      "url": "https://link-a-otra-pelicula.com"
-    },
-    {
-      "titulo": "Tercera Película",
-      "anyo": 2025,
-      "generos": ["Acción", "Aventura"],
-      "edad": "12+",
-      "imagen": "https://ruta-a-imagen-3.jpg",
-      "url": "https://link-a-tercera-pelicula.com"
-    }
-  ]
-}
+[
+  {
+    "titulo": "LALIGA: Más allá del gol",
+    "anio": "2024",
+    "genero": "Deportivo, Documental",
+    "edad": "13+",
+    "imagen": "https://kerterplus.com/wp-content/uploads/2024/07/Diseno-sin-titulo-68.png",
+    "enlace": "https://kerterplus.com/laliga-mas-alla-del-gol/"
+  },
+  {
+    "titulo": "F1: La velocidad del futuro",
+    "anio": "2025",
+    "genero": "Deportes, Acción",
+    "edad": "16+",
+    "imagen": "https://kerterplus.com/wp-content/uploads/2024/07/f1-banner.png",
+    "enlace": "https://kerterplus.com/f1-la-velocidad-del-futuro/"
+  },
+  {
+    "titulo": "El legado del balón",
+    "anio": "2024",
+    "genero": "Drama, Inspiración",
+    "edad": "TP",
+    "imagen": "https://kerterplus.com/wp-content/uploads/2024/07/el-legado-del-balon.png",
+    "enlace": "https://kerterplus.com/el-legado-del-balon/"
+  }
+]
+
