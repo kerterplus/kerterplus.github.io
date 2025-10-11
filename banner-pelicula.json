@@ -1,0 +1,28 @@
+{
+  "peliculas": [
+    {
+      "titulo": "LALIGA: Más allá del gol",
+      "anyo": 2024,
+      "generos": ["Deportivo", "Documental"],
+      "edad": "13+",
+      "imagen": "https://kerterplus.com/wp-content/uploads/2024/07/Diseno-sin-titulo-68.png",
+      "url": "https://kerterplus.com/laliga-mas-alla-del-gol/"
+    },
+    {
+      "titulo": "Otra Película",
+      "anyo": 2023,
+      "generos": ["Drama", "Biografía"],
+      "edad": "16+",
+      "imagen": "https://ruta-a-imagen-2.jpg",
+      "url": "https://link-a-otra-pelicula.com"
+    },
+    {
+      "titulo": "Tercera Película",
+      "anyo": 2025,
+      "generos": ["Acción", "Aventura"],
+      "edad": "12+",
+      "imagen": "https://ruta-a-imagen-3.jpg",
+      "url": "https://link-a-tercera-pelicula.com"
+    }
+  ]
+}
