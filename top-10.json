@@ -1,79 +1,16 @@
 [
-    {
-    "title": "Portugal vs. España",
-    "fecha": "2010",
-    "league": "Amistoso",
-    "img": "https://e01-xlk-ue-marca.uecdn.es/uploads/2025/06/08/68455ae03da59.jpeg",
-    "url": "/premium/hls.html?get=aHR0cHM6Ly92aWRlb3MuZm9vdGJhbGxpYS5uZXQvdXBsb2Fkcy92aWRlby9zb3VyY2VfZmlsZS8zMTQwOS9Qb3J0dWdhbF9Fc3BhX2FfQW1pc3Rvc29fMjAxMF9QVC5tcDQ="
-  },
-    {
-    "title": "Holanda vs. España",
-    "fecha": "2010",
-    "league": "Mundial de la FIFA - Final",
-    "img": "https://img2.rtve.es/imagenes/casillas-levanta-copa-del-mundo/1278895672746.jpg",
-    "url": "/premium/hls.html?get=aHR0cHM6Ly92aWRlb3MuZm9vdGJhbGxpYS5uZXQvdXBsb2Fkcy92aWRlby9zb3VyY2VfZmlsZS8zNTIwOC8yMDEwX05ldGhlcmxhbmRzXy1fU3BhaW5fLV8xLm1wNA==&get2=aHR0cHM6Ly92aWRlb3MuZm9vdGJhbGxpYS5uZXQvdXBsb2Fkcy92aWRlby9zb3VyY2VfZmlsZS8zNTIwOS8yMDEwX05ldGhlcmxhbmRzXy1fU3BhaW5fLV8yLm1wNA=="
-  },
-    {
-    "title": "FC Porto vs. FC Barcelona",
-    "fecha": "2003",
-    "league": "Amistoso - Debut de Messi",
-    "img": "https://www.mundodeportivo.com/files/article_main_microformat/files/fp/uploads/2022/10/16/634bbbfabe3aa.r_d.1569-641-8924.jpeg",
-    "url": "/premium/hls.html?get=aHR0cHM6Ly92aWRlb3MuZm9vdGJhbGxpYS5uZXQvdXBsb2Fkcy92aWRlby9zb3VyY2VfZmlsZS8yMTE2My8yMDAzX1BvcnRvXy1fQmFyX2EubXA0"
-  },
-    {
-    "title": "Hamburger SV vs. FC Barcelona",
-    "fecha": "1960-1961",
-    "league": "European Cup",
-    "img": "https://footballia.net/cache/matches/3572d9bc74d102403df57da6da3161c4.png",
-    "url": "/premium/hls.html?get=aHR0cHM6Ly92aWRlb3MuZm9vdGJhbGxpYS5uZXQvdXBsb2Fkcy92aWRlby9zb3VyY2VfZmlsZS83MS8xOTYxX0hTVl8tX0ZDQi5tcDQ="
-  },
-    {
-    "title": "Hungary vs. Uruguay",
-    "fecha": "1954",
-    "league": "Copa Mundial de la FIFA Suiza",
-    "img": "https://pbs.twimg.com/media/EyNSEZoXMAEyDWR.jpg",
-    "url": "/premium/hls.html?get=aHR0cHM6Ly92aWRlb3MuZm9vdGJhbGxpYS5uZXQvdXBsb2Fkcy92aWRlby9zb3VyY2VfZmlsZS83NzEzMC8xOTU0X0h1bmdhcnlfLV9VcnVndWF5Lm1wNA=="
-  },
-    {
-    "title": "Atlético de Madrid vs. Real Madrid",
-    "fecha": "1988-1989",
-    "league": "LaLiga 1ª División",
-    "img": "https://footballia.eu/cache/matches/5a95650aed995ab233e89987dd3f6ead.png",
-    "url": "/premium/hls.html?get=aHR0cHM6Ly92aWRlb3MuZm9vdGJhbGxpYS5uZXQvdXBsb2Fkcy92aWRlby9zb3VyY2VfZmlsZS82MTIxOC8xOTg4LTg5Xy1fQXRsZXRpY28tTWFkcmlkLVJlYWwtTWFkcmlkLm1wNA=="
-  },
-    {
+  {
     "title": "El rey león",
-    "fecha": "2019",
-    "league": "Aventura, Drama, Familia, Animación",
     "img": "https://image.tmdb.org/t/p/w300//eGfq90BF8QGCMpncF2ag0lGTgKk.jpg",
-    "url": "https://kerterplus.com/hls.html/?get=aHR0cHM6Ly9ydW1ibGUuY29tL2hscy12b2QvNnd0aGNvL3BsYXlsaXN0Lm0zdTg="
+    "url": "https://rumble.com/hls-vod/6wthco/playlist.m3u8",
+    "fecha": "2019",
+    "league": "Película" 
   },
-    {
-    "title": "RC Celta vs. Real Valladolid",
-    "fecha": "2018-2019",
-    "league": "LaLiga 1ª División",
-    "img": "https://footballia.eu/cache/matches/62332b68751feaa80573c0f408a40eac.png",
-    "url": "/premium/hls.html?get=aHR0cHM6Ly92aWRlb3MuZm9vdGJhbGxpYS5uZXQvdXBsb2Fkcy92aWRlby9zb3VyY2VfZmlsZS8xNjQxOS8yMDE4LTE5X0NlbHRhXy1fVmFsbGFkb2xpZC5tcDQ="
-  },
-    {
-    "title": "Real Madrid vs. Manchester City ",
-    "fecha": "2023-2024",
-    "league": "Champions League",
-    "img": "https://footballia.eu/cache/matches/72fa5450c0c72aeb16f47b4218c675f7.png",
-    "url": "/premium/hls.html?get=aHR0cHM6Ly92aWRlb3MyLmZvb3RiYWxsaWEubmV0L3VwbG9hZHMvdmlkZW8vc291cmNlX2ZpbGUvNjI3MTkvMjAyMy0yNF9SLl9NYWRyaWRfLV9NYW5fQ2l0eV8tXzEubXA0&get2=aHR0cHM6Ly92aWRlb3MyLmZvb3RiYWxsaWEubmV0L3VwbG9hZHMvdmlkZW8vc291cmNlX2ZpbGUvNjI3MjAvMjAyMy0yNF9SLl9NYWRyaWRfLV9NYW5fQ2l0eV8tXzIubXA0"
-  },
-    {
-    "title": "Paris Saint-Germain vs. Juventus FC",
-    "fecha": "1996",
-    "league": "Super Cup",
-    "img": "https://upload.wikimedia.org/wikipedia/it/thumb/d/d9/Supercoppa_UEFA_1996_-_Juventus_vs_PSG_-_Ra%C3%AD_e_Zin%C3%A9dine_Zidane.jpg/640px-Supercoppa_UEFA_1996_-_Juventus_vs_PSG_-_Ra%C3%AD_e_Zin%C3%A9dine_Zidane.jpg",
-    "url": "/premium/hls.html?get=aHR0cHM6Ly92aWRlb3MyLmZvb3RiYWxsaWEubmV0L3VwbG9hZHMvdmlkZW8vc291cmNlX2ZpbGUvNTMwNy8xOTk2X1BTR192c19KdXZlbnR1cy5tcDQ="
-  },
-    {
-    "title": "Aston Villa vs. Arsenal FC",
-    "fecha": "2014-2015",
-    "league": "Premier League",
-    "img": "https://sites.duke.edu/wcwp/files/2015/04/mesut-ozil-arsenal-fa-cup_3256206.jpg",
-    "url": "/premium/hls.html?get=aHR0cHM6Ly92aWRlb3MuZm9vdGJhbGxpYS5uZXQvdXBsb2Fkcy92aWRlby9zb3VyY2VfZmlsZS84MTU5MC9Bc3Rvbl9WaWxsYV8tX0Fyc2VuYWxfLV8xLTEubXA0&get2=aHR0cHM6Ly92aWRlb3MuZm9vdGJhbGxpYS5uZXQvdXBsb2Fkcy92aWRlby9zb3VyY2VfZmlsZS84MTU5Mi9Bc3Rvbl9WaWxsYV8tX0Fyc2VuYWxfLV8yLTEubXA0"
+  {
+    "title": "Otra película o serie",
+    "img": "https://ruta-del-poster.png",
+    "url": "https://servidor.com/video.m3u8",
+    "fecha": "2023",
+    "league": "Serie"
   }
 ]
