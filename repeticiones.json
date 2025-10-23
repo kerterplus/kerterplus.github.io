@@ -1,5 +1,21 @@
 [
   {
+    "title": "Real Madrid vs. Juventus",
+    "fecha": "22/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://sportshub.cbsistatic.com/i/2025/10/14/f1a6a037-bcf9-4111-8b8a-01245abac14c/image-1760472558357.jpg",
+    "url": [
+      {
+        "label": "Primer Tiempo",
+        "url": "https://ok.ru/videoembed/9926730779331"
+      },
+      {
+        "label": "Segundo Tiempo",
+        "url": "https://ok.ru/videoembed/9926938462915"
+      }
+    ]
+  },
+  {
     "title": "Roma vs. Inter",
     "fecha": "18/10/2025",
     "league": "Serie A",
