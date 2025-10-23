@@ -58,6 +58,64 @@
     "url": "https://ok.ru/videoembed/9926984141507"
   },
   {
+    "title": "Arsenal vs. Atletico de Madrid",
+    "fecha": "21/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://www.cbssports.com/_next/image?url=https%3A%2F%2Fsportshub.cbsistatic.com%2Fi%2F2025%2F10%2F14%2F4d927fd2-1a5e-48f1-9eb8-43af350416ca%2Fimage-1760470927783.jpg%3Fwidth%3D400%26crop%3D16%3A9%2Csmart&w=3840&q=70",
+    "url": [
+      {
+        "label": "Primer Tiempo",
+        "url": "https://ok.ru/videoembed/9918383393475"
+      },
+      {
+        "label": "Segundo Tiempo",
+        "url": "https://ok.ru/videoembed/9919635917507"
+      }
+    ]
+  },
+  {
+    "title": "PSV vs. Napoli",
+    "fecha": "21/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://sportshub.cbsistatic.com/i/2025/10/14/9f8fa67c-9694-4bf6-8836-273702317368/image-1760470617373.jpg",
+    "url": "https://ok.ru/videoembed/9919782456003"
+  },
+  {
+    "title": "Villarreal vs. Manchester City",
+    "fecha": "21/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://sportshub.cbsistatic.com/i/2025/10/14/33c1456e-8606-405d-bcee-c0f6e3633784/image-1760471279979.jpg",
+    "url": "https://ok.ru/videoembed/9919906253507"
+  },
+  {
+    "title": "Newcastle United vs. Benfica",
+    "fecha": "21/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://www.cbssports.com/_next/image?url=https%3A%2F%2Fsportshub.cbsistatic.com%2Fi%2F2025%2F10%2F14%2Fb8edef29-5278-4fac-9a3a-fee199d50df9%2Fimage-1760471535852.jpg%3Fwidth%3D400%26crop%3D16%3A9%2Csmart&w=3840&q=70",
+    "url": "https://ok.ru/videoembed/9919879252675"
+  },
+   {
+    "title": "FC Copenhagen vs. Borussia Dortmund",
+    "fecha": "21/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://www.cbssports.com/_next/image?url=https%3A%2F%2Fsportshub.cbsistatic.com%2Fi%2F2025%2F10%2F14%2F3f2b7bbd-c24a-4406-9026-8745626cab19%2Fimage-1760471448478.jpg%3Fwidth%3D400%26crop%3D16%3A9%2Csmart&w=3840&q=70",
+    "url": "https://ok.ru/videoembed/9919879711427"
+  },
+  {
+    "title": "Bayer Leverkusen vs. PSG",
+    "fecha": "21/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://sportshub.cbsistatic.com/i/2025/10/14/3641a775-0d64-4ceb-81fb-30a5da3a30e1/image-1760470844195.jpg",
+    "url": "https://ok.ru/videoembed/9919906319043"
+  },
+  {
+    "title": "Barcelona vs. Olympiacos",
+    "fecha": "21/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://www.cbssports.com/_next/image?url=https%3A%2F%2Fsportshub.cbsistatic.com%2Fi%2F2025%2F10%2F14%2Fa92559ba-8f6e-40e7-a659-985d58a98abb%2Fimage-1760470351743.jpg%3Fwidth%3D400%26crop%3D16%3A9%2Csmart&w=3840&q=70",
+    "url": "https://ok.ru/videoembed/9917945547459"
+  },
+  {
     "title": "Roma vs. Inter",
     "fecha": "18/10/2025",
     "league": "Serie A",
