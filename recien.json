@@ -1,0 +1,95 @@
+[
+  {
+    "title": "El Efecto Mariposa",
+    "fecha": "2004",
+    "league": "Ciencia ficción, Suspense",
+    "img": "https://image.tmdb.org/t/p/w300//vtqJkVTvrxbk2BehGO6e6izsUBa.jpg",
+    "url": "https://rumble.com/hls-vod/6xako0/playlist.m3u8"
+  },
+   {
+    "title": "El Hombre de Toronto",
+    "fecha": "2022",
+    "league": "Acción, Aventura, Comedia",
+    "img": "https://image.tmdb.org/t/p/w300//ogLJ4HZUsRZlydxldhNGJVcBm5c.jpg",
+    "url": "https://rumble.com/hls-vod/6x2zgk/playlist.m3u8"
+  },
+  {
+    "title": "Sporting CP vs. Olympique Marseille",
+    "fecha": "22/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://www.cbssports.com/_next/image?url=https%3A%2F%2Fsportshub.cbsistatic.com%2Fi%2F2025%2F10%2F14%2F8a6c7292-8076-4548-85f5-f659b9f9e700%2Fimage-1760473081568.jpg%3Fwidth%3D400%26crop%3D16%3A9%2Csmart&w=3840&q=70",
+    "url": "https://ok.ru/videoembed/9926988401347"
+  },
+  {
+    "title": "Chelsea vs. Ajax",
+    "fecha": "22/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://sportshub.cbsistatic.com/i/2025/10/14/d0022770-b44e-48f9-8830-bcd627a77350/image-1760472474371.jpg",
+    "url": "https://ok.ru/videoembed/9926981847747"
+  },
+  {
+    "title": "Bayern Munich vs. Club Brugge",
+    "fecha": "22/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://www.cbssports.com/_next/image?url=https%3A%2F%2Fsportshub.cbsistatic.com%2Fi%2F2025%2F10%2F14%2Ff8aa9a76-2b94-4180-9bdf-589c9b3b974d%2Fimage-1760472651701.jpg%3Fwidth%3D400%26crop%3D16%3A9%2Csmart&w=3840&q=70",
+    "url": "https://ok.ru/videoembed/9926981978819"
+  },
+  {
+    "title": "Atalanta vs. Slavia Prague",
+    "fecha": "22/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://sportshub.cbsistatic.com/i/2025/10/14/432a5067-c2c6-417d-9d13-2f367c42b62b/image-1760472972968.jpg",
+    "url": "https://ok.ru/videoembed/9926984141507"
+  },
+  {
+    "title": "Arsenal vs. Atletico de Madrid",
+    "fecha": "21/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://www.cbssports.com/_next/image?url=https%3A%2F%2Fsportshub.cbsistatic.com%2Fi%2F2025%2F10%2F14%2F4d927fd2-1a5e-48f1-9eb8-43af350416ca%2Fimage-1760470927783.jpg%3Fwidth%3D400%26crop%3D16%3A9%2Csmart&w=3840&q=70",
+    "url": [
+      {
+        "label": "Primer Tiempo",
+        "url": "https://ok.ru/videoembed/9918383393475"
+      },
+      {
+        "label": "Segundo Tiempo",
+        "url": "https://ok.ru/videoembed/9919635917507"
+      }
+    ]
+  },
+  {
+    "title": "PSV vs. Napoli",
+    "fecha": "21/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://sportshub.cbsistatic.com/i/2025/10/14/9f8fa67c-9694-4bf6-8836-273702317368/image-1760470617373.jpg",
+    "url": "https://ok.ru/videoembed/9919782456003"
+  },
+  {
+    "title": "Villarreal vs. Manchester City",
+    "fecha": "21/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://sportshub.cbsistatic.com/i/2025/10/14/33c1456e-8606-405d-bcee-c0f6e3633784/image-1760471279979.jpg",
+    "url": "https://ok.ru/videoembed/9919906253507"
+  },
+  {
+    "title": "Newcastle United vs. Benfica",
+    "fecha": "21/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://www.cbssports.com/_next/image?url=https%3A%2F%2Fsportshub.cbsistatic.com%2Fi%2F2025%2F10%2F14%2Fb8edef29-5278-4fac-9a3a-fee199d50df9%2Fimage-1760471535852.jpg%3Fwidth%3D400%26crop%3D16%3A9%2Csmart&w=3840&q=70",
+    "url": "https://ok.ru/videoembed/9919879252675"
+  },
+   {
+    "title": "FC Copenhagen vs. Borussia Dortmund",
+    "fecha": "21/10/2025",
+    "league": "UEFA Champions League",
+    "img": "https://www.cbssports.com/_next/image?url=https%3A%2F%2Fsportshub.cbsistatic.com%2Fi%2F2025%2F10%2F14%2F3f2b7bbd-c24a-4406-9026-8745626cab19%2Fimage-1760471448478.jpg%3Fwidth%3D400%26crop%3D16%3A9%2Csmart&w=3840&q=70",
+    "url": "https://ok.ru/videoembed/9919879711427"
+  },
+  {
+    "title": "Vissel Kobe vs. Barcelona",
+    "fecha": "27/07/2025",
+    "league": "Amistoso",
+    "img": "https://image.discovery.indazn.com/ca/v2/ca/image?id=1ad50ap61866ebvyz4175xtjr_image-header_pRow_1751542846000&quality=70",
+    "url": "https://www.youtube.com/embed/fBkd6XyUIRU?si=uFGV-9GvQeS3F9K9"
+  }
+]
