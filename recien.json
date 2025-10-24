@@ -1,16 +1,37 @@
 [
   {
-    "title": "El Efecto Mariposa",
-    "fecha": "2004",
-    "league": "Ciencia ficción, Suspense",
-    "img": "https://image.tmdb.org/t/p/w300//vtqJkVTvrxbk2BehGO6e6izsUBa.jpg",
-    "url": "https://rumble.com/hls-vod/6xako0/playlist.m3u8"
+    "title": "El último encargo",
+    "fecha": "2025",
+    "league": "Acción, Comedia, Crimen",
+    "img": "https://image.tmdb.org/t/p/w300//lbpyI9nwzSVDjS7OnE0uC41UciP.jpg",
+    "url": "https://rumble.com/hls-vod/6xrv4q/playlist.m3u8"
   },
   {
-    "title": "Vissel Kobe vs. Barcelona",
-    "fecha": "27/07/2025",
-    "league": "Amistoso",
-    "img": "https://image.discovery.indazn.com/ca/v2/ca/image?id=1ad50ap61866ebvyz4175xtjr_image-header_pRow_1751542846000&quality=70",
-    "url": "https://www.youtube.com/embed/fBkd6XyUIRU?si=uFGV-9GvQeS3F9K9"
+    "title": "La sirenita",
+    "fecha": "2023",
+    "league": "Aventura, Familia, Fantasía, Romance",
+    "img": "https://image.tmdb.org/t/p/w300//mdszPVnIY7cWgbgJ8zbwu1PiU5V.jpg",
+    "url": "https://rumble.com/hls-vod/6wtgtm/playlist.m3u8"
+  },
+   {
+    "title": "Ben 10: Carrera contra el tiempo",
+    "fecha": "2008",
+    "league": "Acción, Familia, Ciencia ficción",
+    "img": "https://image.tmdb.org/t/p/w300//65YwMIqIuOV8shxysuJytaHSR8C.jpg",
+    "url": "https://rumble.com/hls-vod/6wtgtm/playlist.m3u8"
+  },
+  {
+    "title": "Enemigo Inmortal",
+    "fecha": "2017",
+    "league": "Ciencia ficción, Acción, Aventura, Suspense",
+    "img": "https://image.tmdb.org/t/p/w300//zVkZaPOlSnoxkAPtYQzCmsTzz1z.jpg",
+    "url": "https://rumble.com/hls-vod/6x2sle/playlist.m3u8"
+  },
+  {
+    "title": "El rey león",
+    "fecha": "2019",
+    "league": "Aventura, Drama, Familia, Animación",
+    "img": "https://image.tmdb.org/t/p/w300//eGfq90BF8QGCMpncF2ag0lGTgKk.jpg",
+    "url": "https://rumble.com/hls-vod/6wthco/playlist.m3u8"
   }
 ]
