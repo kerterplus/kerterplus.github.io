@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Descifrador seguro (bsn)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body{font-family:system-ui,Arial,sans-serif;margin:18px;color:#111}
+    textarea{width:100%;height:220px;font-family:monospace; padding:8px; box-sizing:border-box}
+    input[type="number"]{width:140px;padding:6px}
+    button{padding:8px 10px;margin-right:8px;border-radius:6px;border:1px solid #bbb;background:#f4f6f8;cursor:pointer}
+    pre{background:#0f1720;color:#e6edf3;padding:12px;border-radius:6px;overflow:auto;max-height:420px;white-space:pre-wrap}
+    .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}
+    label{font-size:14px}
+    .muted{color:#666;font-size:13px}
+  </style>
+</head>
+<body>
+  <h1>Descifrador seguro (bsn)</h1>
+  <p class="muted">Pega aquí el código ofuscado (o la parte que contiene <code>var bsn = [...]</code>) y pulsa <strong>Descifrar</strong>. El script intentará extraer sólo el array y no ejecutará otras instrucciones (p. ej. redirecciones).</p>
+
+  <textarea id="input" placeholder="Pega aquí el código (ej. var QDP = ''; var bsn = [ '...' , ... ]; ... )"></textarea>
+
+  <div class="row">
+    <button onclick="descifrar()">Descifrar</button>
+    <button onclick="extraerArray()">Extraer array (ver solo array)</button>
+    <button onclick="copiarSalida()">Copiar salida</button>
+    <button onclick="descargarSalida()">Descargar salida</button>
+    <button onclick="limpiar()">Limpiar</button>
+    <label style="margin-left:8px">Offset a restar:</label>
+    <input id="offset" type="number" value="51497186" />
+    <span class="muted"> (ajusta si la ofuscación usa otra constante)</span>
+  </div>
+
+  <h3>Salida:</h3>
+  <pre id="output">(aquí aparecerá el código descifrado o mensajes de error)</pre>
+
+<script>
+function limpiar(){
+  document.getElementById('input').value = '';
+  document.getElementById('output').textContent = '';
+}
+
+// Intenta localizar el array con nombre 'bsn', si no lo encuentra intenta buscar cualquier declaración var/let/const con array,
+// si sigue sin encontrar, intenta localizar el primer literal de array de strings en el texto.
+function findArrayLiteral(text){
+  // 1) buscar bsn explícito
+  let re = /(?:var|let|const)?\s*bsn\s*=\s*(\[[\s\S]*?\]);?/m;
+  let m = text.match(re);
+  if(m) return {name:'bsn', literal: m[1]};
+
+  // 2) buscar cualquier var/let/const name = [ ... ];
+  re = /(?:var|let|const)\s+([a-zA-Z_$][\w$]*)\s*=\s*(\[[\s\S]*?\]);?/m;
+  m = text.match(re);
+  if(m) return {name: m[1], literal: m[2]};
+
+  // 3) buscar primer array literal que parezca contener cadenas Base64 (heurística: presencia de "=" y comillas)
+  re = /(\[\s*(?:['"][A-Za-z0-9+\/=]{4,}['"]\s*(?:,\s*['"][A-Za-z0-9+\/=]{4,}['"]\s*){2,})\])/m;
+  m = text.match(re);
+  if(m) return {name: null, literal: m[1]};
+
+  return null;
+}
+
+function safeEvalArrayLiteral(literal){
+  // Evalúa únicamente el literal del array y devuelve el arreglo.
+  // Esto evita ejecutar código arbitrario fuera del literal.
+  try {
+    // Asegurar que sea un array literal válido
+    // new Function retorna el valor del literal.
+    const fn = new Function("return " + literal + ";");
+    const arr = fn();
+    if(!Array.isArray(arr)) throw new Error("No es un array válido.");
+    return arr;
+  } catch(e){
+    throw new Error("Error al evaluar el literal del array: " + e.message);
+  }
+}
+
+function tryDecodeBase64String(s){
+  try {
+    return atob(s);
+  } catch(e){
+    return null;
+  }
+}
+
+function descifrar(){
+  const input = document.getElementById('input').value;
+  const outEl = document.getElementById('output');
+  outEl.textContent = '';
+
+  if(!input || input.trim().length === 0){
+    outEl.textContent = "Pega primero el código ofuscado en el textarea.";
+    return;
+  }
+
+  const found = findArrayLiteral(input);
+  if(!found){
+    outEl.textContent = "No pude localizar un array de cadenas en el texto. Asegúrate de pegar la porción que contiene `var bsn = [...]` o un array literal de strings.";
+    return;
+  }
+
+  let arr;
+  try {
+    arr = safeEvalArrayLiteral(found.literal);
+  } catch(e){
+    outEl.textContent = "Fallo al evaluar el array: " + e.message;
+    return;
+  }
+
+  if(arr.length === 0){
+    outEl.textContent = "Array vacío.";
+    return;
+  }
+
+  // confirmar que los items parecen base64 (o al menos strings)
+  const allStrings = arr.every(a => typeof a === 'string');
+  if(!allStrings){
+    outEl.textContent = "El array extraído no contiene solo strings. Muestra (primeros elementos):\n\n" + JSON.stringify(arr.slice(0,6), null, 2);
+    return;
+  }
+
+  const offset = Number(document.getElementById('offset').value) || 0;
+
+  let result = "";
+  for(let i=0;i<arr.length;i++){
+    const item = arr[i].trim();
+    // Sanity: si el string está entre comillas dentro del literal, ya está aquí como JS string
+    let decoded = tryDecodeBase64String(item);
+    if(decoded === null){
+      // si no es decodificable, mostrar señal y continuar
+      result += "[ERR-BASE64]";
+      continue;
+    }
+    // extraer dígitos
+    const digits = decoded.replace(/\D/g,'');
+    if(!digits){
+      result += "[NO-DIGITS]";
+      continue;
+    }
+    const num = parseInt(digits, 10);
+    if(isNaN(num)){
+      result += "[BAD-NUM]";
+      continue;
+    }
+    const charCode = num - offset;
+    if(charCode < 0){
+      // posible offset incorrecto; ponemos marcador
+      result += "[BAD-OFFSET]";
+      continue;
+    }
+    result += String.fromCharCode(charCode);
+  }
+
+  // Algunos scripts usan decodeURIComponent(escape(...)) para forzar UTF-8;
+  // lo intentaremos, y si falla mostramos la cadena cruda.
+  let finalOut = result;
+  try {
+    // sólo intentar si hay bytes no ASCII (heurística)
+    finalOut = decodeURIComponent(escape(result));
+  } catch(e){
+    // si falla, usamos el result tal cual (evitamos "URI malformed")
+    finalOut = result;
+  }
+
+  // Si el resultado parece una URL (comienza con http o https), mostrarlo claramente
+  if(/^\s*https?:\/\//i.test(finalOut.trim())){
+    outEl.textContent = "Resultado decodificado (probable URL):\n\n" + finalOut;
+  } else {
+    outEl.textContent = finalOut;
+  }
+}
+
+function extraerArray(){
+  // Muestra el array literal extraído (útil para verificar)
+  const input = document.getElementById('input').value;
+  const outEl = document.getElementById('output');
+  const found = findArrayLiteral(input);
+  if(!found){
+    outEl.textContent = "No encontré array literal en el texto.";
+    return;
+  }
+  outEl.textContent = "Nombre variable (si se detectó): " + (found.name || "(no detectado)") + "\n\nArray literal:\n\n" + found.literal;
+}
+
+function copiarSalida(){
+  const out = document.getElementById('output').textContent || '';
+  if(!navigator.clipboard){
+    alert('Tu navegador no soporta copiar automáticamente. Selecciona y copia manualmente.');
+    return;
+  }
+  navigator.clipboard.writeText(out).then(()=> alert('Salida copiada al portapapeles'), ()=> alert('No se pudo copiar'));
+}
+
+function descargarSalida(){
+  const text = document.getElementById('output').textContent || '';
+  const blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'decoded.txt';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+}
+</script>
+</body>
+</html>
