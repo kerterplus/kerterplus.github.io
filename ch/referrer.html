@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body data-bs-theme="dark">
+    <div class="container">
+        <h1>Ver Acceso Denegado</h1>
+        <form method="GET">
+            <div class="mb-3">
+                <label for="referer" class="form-label">Link de la Origen</label>
+                <input type="text" class="form-control" id="referer" name="referer" placeholder="Ingrese el enlace de la página">
+            </div>
+            <div class="mb-3">
+                <label for="url" class="form-label">Link del Pagina de Canal</label>
+                <input type="text" class="form-control" id="url" name="url" placeholder="Ingrese el enlace del canal">
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+
+        <div class="mt-4">
+            <h2>Contenido:</h2>
+            <textarea class="form-control" rows="10" readonly>
+                <?php
+                if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                    $referer = $_GET['referer'] ?? '';
+                    $url = $_GET['url'] ?? '';
+
+                    $options = [
+                        'http' => [
+                            'header' => "Referer: $referer\r\n"
+                        ]
+                    ];
+
+                    $context = stream_context_create($options);
+                    $response = file_get_contents($url, false, $context);
+
+                    echo $response;
+                }
+                ?>
+            </textarea>
+            <button id="copyButton" class="btn btn-secondary mt-3">Copiar Respuesta</button>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.4/dist/umd/popper.min.js" integrity="sha384-9qXTPwkk2qVxwmXmF4aCVHMF1FTzRVXsvaBY9eLIEoPVkaNKfNJxLp5jVXVcxk/y" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+    <script>
+        document.getElementById('copyButton').addEventListener('click', function() {
+            var textarea = document.querySelector('textarea');
+            textarea.select();
+            document.execCommand('copy');
+            alert('¡El contenido se ha copiado al portapapeles!');
+        });
+    </script>
+</body>
+</html>
