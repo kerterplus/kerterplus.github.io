@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Descifrador</title>
+</head>
+<body>
+    <h2>Descifrar Código</h2>
+    <textarea id="input" rows="10" cols="100" placeholder="Pega aquí el array rYx completo..."></textarea><br><br>
+    <button onclick="descifrar()">Descifrar</button>
+    <h3>Resultado:</h3>
+    <pre id="output"></pre>
+
+    <script>
+        function descifrar() {
+            let input = document.getElementById('input').value;
+
+            try {
+                // Evalúa el array que pegues (debe contener la variable rYx)
+                eval(input); // ⚠️ Cuidado: eval ejecuta cualquier código. No usar con código externo no confiable.
+
+                let ljm = "";
+                rYx.forEach(function(value) {
+                    let decoded = atob(value);
+                    let digits = decoded.replace(/\D/g, '');
+                    let charCode = parseInt(digits) - 58622547;
+                    ljm += String.fromCharCode(charCode);
+                });
+
+                document.getElementById('output').innerText = decodeURIComponent(escape(ljm));
+            } catch (err) {
+                document.getElementById('output').innerText = "Error al procesar: " + err;
+            }
+        }
+    </script>
+</body>
+</html>
