@@ -1,162 +1,157 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<title>Descifrador seguro (bsn) — Dark Workspace</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <title>Descifrador seguro (bsn)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #2ea043;
+      --border: #30363d;
+      --btn-bg: #21262d;
+      --btn-hover: #30363d;
+      --btn-danger: #da3633;
+      --btn-danger-hover: #b92425;
+    }
 
-<style>
-  :root {
-    --bg: #0d1117;
-    --panel: #161b22;
-    --border: #30363d;
-    --text: #e6edf3;
-    --accent: #58a6ff;
-    --accent-hover: #1f6feb;
-    --danger: #d9534f;
-    --muted: #8b949e;
-    --radius: 10px;
-    --font: system-ui, Arial, sans-serif;
-  }
+    body {
+      font-family: system-ui, Arial, sans-serif;
+      margin: 20px;
+      background: var(--bg);
+      color: var(--text);
+    }
 
-  body {
-    margin: 0;
-    padding: 22px;
-    background: var(--bg);
-    font-family: var(--font);
-    color: var(--text);
-  }
+    h1 {
+      text-align: center;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
 
-  h1 {
-    margin-top: 0;
-    text-align: center;
-    color: var(--accent);
-    font-size: 26px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
+    p {
+      text-align: center;
+      margin-bottom: 25px;
+      color: var(--muted);
+    }
 
-  textarea {
-    width: 100%;
-    height: 260px;
-    font-family: monospace;
-    padding: 14px;
-    box-sizing: border-box;
-    resize: vertical;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    color: var(--text);
-    outline: none;
-  }
+    textarea {
+      width: 100%;
+      height: 250px;
+      font-family: monospace;
+      padding: 12px;
+      border-radius: 10px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--text);
+      resize: vertical;
+    }
 
-  .workspace {
-    max-width: 1050px;
-    margin: auto;
-  }
+    input[type="number"] {
+      width: 140px;
+      padding: 8px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+    }
 
-  button {
-    padding: 10px 14px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background: var(--panel);
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.15s;
-    color: var(--text);
-  }
+    button {
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--btn-bg);
+      cursor: pointer;
+      transition: 0.2s;
+      color: var(--text);
+    }
+    button:hover {
+      background: var(--btn-hover);
+    }
 
-  button:hover {
-    background: var(--accent-hover);
-    border-color: var(--accent-hover);
-  }
+    /* botón limpiar rojo */
+    button:nth-child(5) {
+      background: var(--btn-danger);
+      border-color: var(--btn-danger);
+    }
+    button:nth-child(5):hover {
+      background: var(--btn-danger-hover);
+    }
 
-  .danger:hover {
-    background: var(--danger);
-    border-color: var(--danger);
-  }
+    pre {
+      background: #000000;
+      color: var(--text);
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      overflow: auto;
+      max-height: 420px;
+      white-space: pre-wrap;
+      margin-top: 12px;
+      font-size: 14px;
+    }
 
-  pre {
-    margin-top: 12px;
-    background: black;
-    border: 1px solid var(--border);
-    color: #07dd66;
-    padding: 16px;
-    border-radius: var(--radius);
-    max-height: 480px;
-    white-space: pre-wrap;
-    overflow-y: auto;
-    line-height: 1.5;
-  }
+    .row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 15px 0;
+      justify-content: center;
+    }
 
-  .row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 14px 0;
-  }
+    label {
+      font-size: 14px;
+    }
 
-  input[type="number"] {
-    width: 160px;
-    padding: 7px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    background: var(--panel);
-    color: var(--text);
-  }
-
-  label {
-    font-size: 14px;
-  }
-
-  .muted {
-    color: var(--muted);
-    font-size: 14px;
-  }
-</style>
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
 </head>
-<body>
 
-<div class="workspace">
-  <h1>🔐 Descifrador seguro (bsn)</h1>
-  <p class="muted">Pega el código ofuscado (el que contiene <code>var bsn = [...]</code>) y presiona un botón.</p>
+<body>
+  <h1>🛠 Descifrador seguro (bsn)</h1>
+  <p>Pega el código ofuscado y presiona <strong>Descifrar</strong></p>
 
   <textarea id="input" placeholder="Pega aquí el código..."></textarea>
 
   <div class="row">
-    <button onclick="descifrar()">✅ Descifrar</button>
-    <button onclick="extraerArray()">🧩 Ver solo array</button>
-    <button onclick="copiarSalida()">📋 Copiar salida</button>
-    <button onclick="descargarSalida()">⬇️ Descargar</button>
-    <button class="danger" onclick="limpiar()">🗑 Limpiar</button>
+    <button onclick="descifrar()">Descifrar</button>
+    <button onclick="extraerArray()">Extraer array</button>
+    <button onclick="copiarSalida()">Copiar salida</button>
+    <button onclick="descargarSalida()">Descargar</button>
+    <button onclick="limpiar()">Limpiar</button>
     <label>Offset:</label>
-    <input id="offset" type="number" value="51497186">
+    <input id="offset" type="number" value="51497186" />
   </div>
 
   <h3>Salida:</h3>
-  <pre id="output">(Aquí aparecerá el resultado)</pre>
-</div>
+  <pre id="output">(aquí aparecerá el código descifrado o mensajes de error)</pre>
 
+
+
+<!-- ✅ TU JAVASCRIPT ORIGINAL INTACTO -->
 <script>
 function limpiar(){
-  input.value = '';
-  output.textContent = '';
+  document.getElementById('input').value = '';
+  document.getElementById('output').textContent = '';
 }
 
 function findArrayLiteral(text){
   let re = /(?:var|let|const)?\s*bsn\s*=\s*(\[[\s\S]*?\]);?/m;
   let m = text.match(re);
-  if (m) return { name:"bsn", literal: m[1] };
-
+  if(m) return {name:'bsn', literal: m[1]};
   re = /(?:var|let|const)\s+([a-zA-Z_$][\w$]*)\s*=\s*(\[[\s\S]*?\]);?/m;
   m = text.match(re);
-  if (m) return { name:m[1], literal:m[2] };
-
+  if(m) return {name: m[1], literal: m[2]};
   re = /(\[\s*(?:['"][A-Za-z0-9+\/=]{4,}['"]\s*(?:,\s*['"][A-Za-z0-9+\/=]{4,}['"]\s*){2,})\])/m;
   m = text.match(re);
-  if (m) return { name:null, literal:m[1] };
-
+  if(m) return {name: null, literal: m[1]};
   return null;
 }
 
@@ -164,63 +159,103 @@ function safeEvalArrayLiteral(literal){
   try {
     const fn = new Function("return " + literal + ";");
     const arr = fn();
-    if(!Array.isArray(arr)) throw new Error("La expresión no es un array válido.");
+    if(!Array.isArray(arr)) throw new Error("No es un array válido.");
     return arr;
-  } catch(e){ throw new Error(e.message); }
+  } catch(e){
+    throw new Error("Error al evaluar el array: " + e.message);
+  }
 }
 
 function tryDecodeBase64String(s){
   try { return atob(s); }
-  catch { return null; }
+  catch(e){ return null; }
 }
 
 function descifrar(){
-  const txt = input.value.trim();
-  if (!txt) return output.textContent = "⚠️ No hay código pegado.";
-
-  const found = findArrayLiteral(txt);
-  if (!found) return output.textContent = "❌ No se encontró ningún array `bsn`.";
-
-  let arr = safeEvalArrayLiteral(found.literal);
-  let offset = Number(offset.value) || 0;
+  const input = document.getElementById('input').value;
+  const outEl = document.getElementById('output');
+  outEl.textContent = '';
+  if(!input || input.trim().length === 0){
+    outEl.textContent = "Pega primero el código ofuscado en el textarea.";
+    return;
+  }
+  const found = findArrayLiteral(input);
+  if(!found){
+    outEl.textContent = "No pude localizar un array de cadenas en el texto.";
+    return;
+  }
+  let arr;
+  try {
+    arr = safeEvalArrayLiteral(found.literal);
+  } catch(e){
+    outEl.textContent = "Fallo al evaluar el array: " + e.message;
+    return;
+  }
+  if(arr.length === 0){
+    outEl.textContent = "Array vacío.";
+    return;
+  }
+  const allStrings = arr.every(a => typeof a === 'string');
+  if(!allStrings){
+    outEl.textContent = "El array extraído no es solo strings:\n\n" + JSON.stringify(arr.slice(0,6), null, 2);
+    return;
+  }
+  const offset = Number(document.getElementById('offset').value) || 0;
   let result = "";
-
-  arr.forEach(i => {
-    let decoded = tryDecodeBase64String(i.trim());
-    if(decoded === null) return result += "[ERR]";
-
-    let digits = decoded.replace(/\D/g,'');
-    let num = parseInt(digits, 10);
-    if(isNaN(num)) return result += "[BAD]";
-
-    result += String.fromCharCode(num - offset);
-  });
-
-  try { result = decodeURIComponent(escape(result)) } catch(e){}
-
-  output.textContent = result;
+  for(let i=0;i<arr.length;i++){
+    const item = arr[i].trim();
+    let decoded = tryDecodeBase64String(item);
+    if(decoded === null){ result += "[ERR-BASE64]"; continue; }
+    const digits = decoded.replace(/\D/g,'');
+    if(!digits){ result += "[NO-DIGITS]"; continue; }
+    const num = parseInt(digits, 10);
+    if(isNaN(num)){ result += "[BAD-NUM]"; continue; }
+    const charCode = num - offset;
+    if(charCode < 0){ result += "[BAD-OFFSET]"; continue; }
+    result += String.fromCharCode(charCode);
+  }
+  let finalOut = result;
+  try { finalOut = decodeURIComponent(escape(result)); }
+  catch(e){ finalOut = result; }
+  if(/^\s*https?:\/\//i.test(finalOut.trim())){
+    outEl.textContent = "Resultado decodificado (probable URL):\n\n" + finalOut;
+  } else {
+    outEl.textContent = finalOut;
+  }
 }
 
 function extraerArray(){
-  const found = findArrayLiteral(input.value);
-  if(!found) return output.textContent = "❌ No se encontró ningún array.";
-  output.textContent = found.literal;
+  const input = document.getElementById('input').value;
+  const outEl = document.getElementById('output');
+  const found = findArrayLiteral(input);
+  if(!found){
+    outEl.textContent = "No encontré array literal en el texto.";
+    return;
+  }
+  outEl.textContent = "Nombre variable detectado: " + (found.name || "(no detectado)") + "\n\nArray literal:\n\n" + found.literal;
 }
 
 function copiarSalida(){
-  navigator.clipboard.writeText(output.textContent);
-  alert("✅ Copiado");
+  const out = document.getElementById('output').textContent || '';
+  if(!navigator.clipboard){
+    alert('Tu navegador no soporta copiar automáticamente.');
+    return;
+  }
+  navigator.clipboard.writeText(out).then(()=> alert('Salida copiada'), ()=> alert('No se pudo copiar'));
 }
 
 function descargarSalida(){
-  const blob = new Blob([output.textContent], {type: "text/plain;charset=utf-8"});
-  const a = document.createElement("a");
+  const text = document.getElementById('output').textContent || '';
+  const blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = "decoded.txt";
+  a.download = 'decoded.txt';
+  document.body.appendChild(a);
   a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 1500);
 }
 </script>
-
 </body>
 </html>
+
 
