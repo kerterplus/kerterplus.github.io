@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Plan Personal · Kendry — Kerter</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%23CC9A48'/><text x='50' y='57' font-size='48' text-anchor='middle' fill='white' font-family='system-ui'>K</text></svg>">
+<style>
+  /* SYSTEM / APPLE-LIKE BASE */
+  :root{
+    --bg:#f6f7f8;
+    --card:#ffffff;
+    --muted:#697077;
+    --glass: rgba(255,255,255,0.6);
+    --accent: #CC9A48; /* tu color preferido */
+    --accent-dark: #b27e3c;
+    --shadow: 0 8px 30px rgba(20,20,20,0.08);
+    --radius: 14px;
+    --glass-border: rgba(255,255,255,0.6);
+    --success: #2ecc71;
+    --danger: #ff6b6b;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  }
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background: linear-gradient(180deg,#f7f8f9 0%, #eef2f5 100%);
+    color: #111318;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:32px;
+    box-sizing:border-box;
+  }
+
+  /* layout */
+  .wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns: 1fr 420px;gap:28px;align-items:start;}
+  header{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:6px}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo {
+    width:56px;height:56px;border-radius:12px;background:linear-gradient(160deg,var(--accent),var(--accent-dark));
+    box-shadow: 0 6px 18px rgba(204,154,72,0.25);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:22px;
+  }
+  h1{margin:0;font-size:20px;letter-spacing:-0.2px}
+  p.lead{margin:0;color:var(--muted);font-size:14px}
+
+  /* cards */
+  .card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border:1px solid rgba(16,24,32,0.04)}
+  .small{padding:12px}
+
+  /* left column content */
+  .hero{
+    display:flex;gap:18px;align-items:center;padding:22px;border-radius:16px;background:
+      linear-gradient(180deg,rgba(255,255,255,0.7),rgba(255,255,255,0.5));
+    box-shadow: 0 10px 30px rgba(18,24,30,0.06);
+    border:1px solid rgba(16,24,32,0.04);
+  }
+  .hero .title{font-size:18px;margin:0 0 6px 0}
+  .hero .sub{color:var(--muted);font-size:13px;margin:0}
+  .hero .stat{margin-left:auto;text-align:right}
+  .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(204,154,72,0.12);color:var(--accent);font-weight:600;font-size:13px}
+
+  .grid {display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+  .full{grid-column:1/-1}
+
+  .section-title{font-weight:700;margin-bottom:8px}
+  .muted{color:var(--muted);font-size:13px}
+
+  /* schedule */
+  .schedule {display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .day{padding:12px;border-radius:12px;background:linear-gradient(180deg,rgba(0,0,0,0.02),rgba(255,255,255,0.5))}
+  .time{font-weight:700;font-size:14px}
+  .task{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(0,0,0,0.04)}
+  .task:last-child{border-bottom:0}
+
+  /* interactive planner */
+  .planner{display:flex;flex-direction:column;gap:10px}
+  .week{display:flex;gap:8px;align-items:stretch}
+  .daycol{flex:1;background:linear-gradient(180deg,white,rgba(255,255,255,0.98));padding:10px;border-radius:12px;min-height:120px}
+  .event{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:white;padding:6px 8px;border-radius:8px;font-size:12px;margin-bottom:8px;box-shadow:0 6px 14px rgba(204,154,72,0.12)}
+  .event.grey{background:linear-gradient(90deg,#f0f2f5,#f6f7f8);color:#333;border:1px solid rgba(0,0,0,0.04)}
+
+  /* controls */
+  .controls{display:flex;gap:8px;align-items:center}
+  button.btn{
+    background:var(--accent);color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 8px 22px rgba(204,154,72,0.12);
+  }
+  button.ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:8px 12px;border-radius:10px}
+
+  /* checklists/30-60-90 */
+  .checklist{display:grid;gap:8px}
+  .check-item{display:flex;gap:12px;align-items:flex-start}
+  .check-item input[type=checkbox]{width:18px;height:18px;margin-top:4px}
+
+  /* progress */
+  .progress{height:10px;background:linear-gradient(90deg,#eef1f3,#f7f8f9);border-radius:999px;overflow:hidden}
+  .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-dark));width:40%}
+
+  /* message boxes */
+  .codebox{background:#f7f9fb;border-radius:10px;padding:10px;font-family:monospace;font-size:13px;overflow:auto}
+  .copy{background:rgba(0,0,0,0.04);padding:6px 10px;border-radius:8px;cursor:pointer}
+
+  /* responsive */
+  @media (max-width:1000px){
+    .wrap{grid-template-columns:1fr; padding:16px;}
+    .grid{grid-template-columns:1fr}
+  }
+
+  /* small helpers */
+  .muted-sm{color:var(--muted);font-size:12px}
+  .center{display:flex;align-items:center;justify-content:center}
+  footer{grid-column:1/-1;margin-top:18px;color:var(--muted);font-size:13px;text-align:center}
+  .hr{height:1px;background:linear-gradient(90deg,#00000008,#00000006);margin:12px 0;border-radius:6px}
+  .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:#fff; border:1px solid rgba(0,0,0,0.04)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">
+      <div class="logo">K</div>
+      <div>
+        <h1>Plan de Organización · Kendry — Kerter</h1>
+        <p class="lead">Un plan claro, motivador y visual para cumplir tu rutina, tu relación y tus metas.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <div class="muted-sm">Última edición: <strong id="fechaEdicion"></strong></div>
+      <div class="controls">
+        <button class="btn" id="guardarBtn" title="Guardar progreso local">Guardar</button>
+        <button class="ghost" id="imprimirBtn" title="Imprimir / Exportar a PDF">Imprimir / PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- LEFT COLUMN -->
+  <main>
+    <section class="card hero">
+      <div style="flex:1">
+        <div class="title">Rutina semanal personalizada</div>
+        <div class="sub">Basado en tu horario: <strong>lunes–viernes 7:30–17:00</strong>, sábado hasta 12:00. Gym 17:30–19:00 aprox.</div>
+        <div style="height:8px"></div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div class="pill">One & One — Visitas alternadas</div>
+          <div class="muted-sm">Kerter · Progreso 30/60/90 & KPI semanal</div>
+        </div>
+      </div>
+      <div class="stat center">
+        <div style="text-align:right">
+          <div style="font-size:20px;font-weight:700">Motivación</div>
+          <div class="muted-sm">Haz que cada día cuente • Pequeñas victorias</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick visual KPIs -->
+    <div class="grid">
+      <div class="card small">
+        <div class="section-title">Resumen Rápido</div>
+        <div class="muted">Trabajo fijo</div>
+        <div style="display:flex;gap:6px;margin-top:8px">
+          <div class="tag">FAR • 7:30–17:00</div>
+          <div class="tag">Sáb 08:00–12:00</div>
+          <div class="tag">Gym 17:30–19:00</div>
+        </div>
+        <div class="hr"></div>
+        <div class="muted-sm">Relación</div>
+        <div style="margin-top:6px">Novia en <strong>Bauta</strong>. Tú en <strong>Güira de Melena</strong>. Alternancia de fines: <strong>One & One</strong>.</div>
+      </div>
+
+      <div class="card small">
+        <div class="section-title">Progreso Kerter</div>
+        <div class="muted-sm">Meta 90 días: ventas, SOP y delegar</div>
+        <div style="height:12px"></div>
+        <div class="progress"><i id="kerterProgres" style="width:34%"></i></div>
+        <div style="display:flex;justify-content:space-between;margin-top:8px">
+          <div class="muted-sm">34% completado</div>
+          <div class="muted-sm">Sigue tu checklist</div>
+        </div>
+      </div>
+
+      <!-- Schedule cards -->
+      <div class="card full">
+        <div class="section-title">Rutina detallada — días de semana</div>
+        <div class="muted-sm">Bloques sugeridos: bloque matinal Kerter, trabajo FAR, gym, bloque Kerter nocturno, tiempo con familia/novia.</div>
+        <div style="height:12px"></div>
+        <div class="schedule">
+          <div class="day">
+            <div class="time">05:30 — 07:00</div>
+            <div class="task"><div><strong>Despertar</strong><div class="muted-sm">Meditación 10–15 min + desayuno</div></div><div class="muted">05:30</div></div>
+            <div class="task"><div><strong>Bloque Kerter</strong><div class="muted-sm">Tarea MIT 45 min (marketing / producto)</div></div><div class="muted">05:45–06:30</div></div>
+          </div>
+
+          <div class="day">
+            <div class="time">17:30 — 22:00</div>
+            <div class="task"><div><strong>Gym</strong><div class="muted-sm">1–1.5 h</div></div><div class="muted">17:30–19:00</div></div>
+            <div class="task"><div><strong>Cena / Familia</strong><div class="muted-sm">Habla con mamá si toca</div></div><div class="muted">19:15–20:00</div></div>
+            <div class="task"><div><strong>Bloque Kerter</strong><div class="muted-sm">Ventas, respuestas, subir items (20:00–21:00)</div></div><div class="muted">20:00–21:00</div></div>
+            <div class="task"><div><strong>Novia</strong><div class="muted-sm">Llamada corta 15–20 min (21:00–21:30)</div></div><div class="muted">21:00</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week planner -->
+      <div class="card full">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="section-title">Planner semanal (Interactivo)</div>
+            <div class="muted-sm">Arrastra mentalmente tus bloques y guarda para mantener consistencia.</div>
+          </div>
+          <div class="muted-sm">Arrastra tareas en tu cabeza — este planner es un resumen con eventos prefijados.</div>
+        </div>
+
+        <div style="height:12px"></div>
+        <div class="planner">
+          <div class="week">
+            <div class="daycol card">
+              <div style="font-weight:700;margin-bottom:8px">Lunes</div>
+              <div class="event">05:45–06:30 • Bloque Kerter (MIT)</div>
+              <div class="event grey">07:30–17:00 • Trabajo (FAR)</div>
+              <div class="event">17:30–19:00 • Gym</div>
+            </div>
+            <div class="daycol card">
+              <div style="font-weight:700;margin-bottom:8px">Martes</div>
+              <div class="event">05:45–06:30 • Mejorar 2 descripciones</div>
+              <div class="event grey">07:30–17:00 • Trabajo</div>
+              <div class="event">20:00–21:00 • Publicar promoción (IG)</div>
+            </div>
+          </div>
+
+          <div class="week">
+            <div class="daycol card">
+              <div style="font-weight:700;margin-bottom:8px">Miércoles</div>
+              <div class="event">05:45–06:30 • Contactar 5 clientes</div>
+              <div class="event grey">07:30–17:00 • Trabajo</div>
+              <div class="event">21:00 • Llamada con novia (breve)</div>
+            </div>
+            <div class="daycol card">
+              <div style="font-weight:700;margin-bottom:8px">Jueves</div>
+              <div class="event">05:45–06:30 • Revisar inventario</div>
+              <div class="event grey">07:30–17:00 • Trabajo</div>
+              <div class="event">20:00–21:00 • Crear contenido / anuncios</div>
+            </div>
+          </div>
+
+          <div class="week">
+            <div class="daycol card">
+              <div style="font-weight:700;margin-bottom:8px">Viernes</div>
+              <div class="event">05:45–06:30 • Plan de envíos (Sáb)</div>
+              <div class="event grey">07:30–17:00 • Trabajo</div>
+              <div class="event">20:00–21:00 • Revisar stock y empaques</div>
+            </div>
+            <div class="daycol card">
+              <div style="font-weight:700;margin-bottom:8px">Sábado</div>
+              <div class="event">08:00–12:00 • Compras / gestiones Kerter</div>
+              <div class="event grey">Tarde — Visita a Bauta o recibir</div>
+            </div>
+          </div>
+
+          <div class="week">
+            <div class="daycol card">
+              <div style="font-weight:700;margin-bottom:8px">Domingo</div>
+              <div class="event">09:00–10:00 • Casa & Bicicleta (mantenimiento)</div>
+              <div class="event">Tarde • Tiempo de pareja (3–6 h)</div>
+              <div class="event">Noche • Planificación semanal (30 min)</div>
+            </div>
+            <div class="daycol card">
+              <div style="font-weight:700;margin-bottom:8px">Notas</div>
+              <div class="muted-sm">Si vas, planifica 1 actividad destacada. Si viene ella, reserva 2 bloques de calidad.</div>
+              <div style="height:10px"></div>
+              <div class="muted-sm">Regla: alternancia estricta — evita decisiones de último minuto.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 30/60/90 -->
+      <div class="card">
+        <div class="section-title">Plan Kerter — 30 / 60 / 90 días (paso a paso)</div>
+        <div style="height:8px"></div>
+        <div class="muted-sm"><strong>Objetivo 90 días:</strong> Aumentar ventas, SOPs y delegar tareas operativas.</div>
+        <div style="height:10px"></div>
+
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <div style="flex:1">
+            <div style="font-weight:700">Primeros 30 días</div>
+            <ul>
+              <li>Semana 1: Lista y priorización top-20 productos. Mejorar fotos y descripciones (meta: 10 productos listos).</li>
+              <li>Semana 2: Optimizar precios, métodos de pago y CTA en cada ficha.</li>
+              <li>Semana 3: Plantillas de mensajes (WhatsApp/Enzona/Transfermóvil); respuestas rápidas.</li>
+              <li>Semana 4: Lanzar 1 promoción estructurada (paquete o envío gratis por provincia).</li>
+            </ul>
+          </div>
+          <div style="flex:1">
+            <div style="font-weight:700">60 días</div>
+            <ul>
+              <li>Crear SOP: paso a paso de empaques y tiempos de envío por provincia.</li>
+              <li>Implementar hoja de seguimiento (Google Sheets/Trello) para pedidos.</li>
+              <li>Lanzar 2 campañas pequeñas en redes. Medir CPC y conversiones.</li>
+            </ul>
+            <div style="height:6px"></div>
+            <div style="font-weight:700">90 días</div>
+            <ul>
+              <li>Revisar métricas y optimizar lo que funcionó.</li>
+              <li>Contratar apoyo para empaques/atención si hay flujo.</li>
+              <li>Crear 1 producto digital o servicio recurrente (ingresos pasivos).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Checklists -->
+      <div class="card">
+        <div class="section-title">Checklists (usa y guarda)</div>
+        <div class="muted-sm">Marca lo que completes. El botón "Guardar" persiste en tu navegador.</div>
+        <div style="height:10px"></div>
+
+        <div class="checklist" id="checklist">
+          <label class="check-item"><input type="checkbox" data-id="c1"> Priorizar top-20 productos y mejoras de fotos</label>
+          <label class="check-item"><input type="checkbox" data-id="c2"> Crear plantillas de pago y mensajes</label>
+          <label class="check-item"><input type="checkbox" data-id="c3"> Preparar promoción 1 (envío/descuento)</label>
+          <label class="check-item"><input type="checkbox" data-id="c4"> Crear SOP de empaques</label>
+          <label class="check-item"><input type="checkbox" data-id="c5"> Hacer hoja de seguimiento de pedidos</label>
+        </div>
+      </div>
+
+      <!-- Scripts / copy -->
+      <div class="card">
+        <div class="section-title">Mensajes & Scripts rápidos</div>
+        <div class="muted-sm">Copia y usa — personalízalos al enviar.</div>
+        <div style="height:10px"></div>
+
+        <div>
+          <div style="font-weight:700">Para clientes</div>
+          <div class="codebox" id="clienteMsg">Hola {nombre}, gracias por tu interés. Tenemos X unidades disponibles. ¿Quieres que te la reserve y te envío opciones de pago y envío?</div>
+          <div style="height:8px"></div>
+          <div style="display:flex;gap:8px">
+            <div class="copy" onclick="copyText('clienteMsg')">Copiar mensaje cliente</div>
+            <div class="copy" onclick="editText('clienteMsg')">Editar</div>
+          </div>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div>
+          <div style="font-weight:700">Para tu novia</div>
+          <div class="codebox" id="noviaMsg">Te extraño cariño. Este finde me toca a mí / te toca a ti (elige). ¿Qué te gustaría hacer? Yo propongo: _______</div>
+          <div style="height:8px"></div>
+          <div style="display:flex;gap:8px">
+            <div class="copy" onclick="copyText('noviaMsg')">Copiar mensaje novia</div>
+            <div class="copy" onclick="editText('noviaMsg')">Editar</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Pomodoro -->
+      <div class="card">
+        <div class="section-title">Temporizador Pomodoro</div>
+        <div class="muted-sm">Usa para bloques de 25/50 minutos.</div>
+        <div style="height:12px"></div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input type="number" id="pomTime" value="25" min="5" style="width:70px;padding:8px;border-radius:8px;border:1px solid #e6e9ec"> minutos
+          <button class="btn" id="startPom">Iniciar</button>
+          <button class="ghost" id="stopPom">Detener</button>
+        </div>
+        <div style="height:12px"></div>
+        <div style="font-size:18px;font-weight:700" id="pomDisplay">25:00</div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- RIGHT COLUMN -->
+  <aside>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700">Revisión semanal</div>
+          <div class="muted-sm">Domingo noche • 30 minutos</div>
+        </div>
+        <div style="text-align:right">
+          <div class="muted-sm">KPIs</div>
+          <div style="font-weight:700">Ventas / Horas / Calidad</div>
+        </div>
+      </div>
+
+      <div style="height:12px"></div>
+      <div style="display:flex;gap:8px;flex-direction:column">
+        <label class="muted-sm">Ventas semana (número)</label>
+        <input type="number" id="ventasSemana" value="0" style="padding:8px;border-radius:8px;border:1px solid #e6e9ec">
+        <label class="muted-sm">Horas dedicadas a Kerter (esta semana)</label>
+        <input type="number" id="horasKerter" value="0" style="padding:8px;border-radius:8px;border:1px solid #e6e9ec">
+        <label class="muted-sm">Calidad tiempo con novia (1-5)</label>
+        <input type="number" id="calidadNovia" value="4" min="1" max="5" style="padding:8px;border-radius:8px;border:1px solid #e6e9ec">
+        <div style="height:10px"></div>
+        <button class="btn" id="calcKPI">Actualizar KPIs</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700">Mantenimiento bicicleta</div>
+          <div class="muted-sm">1 domingo al mes • 30–60 min</div>
+        </div>
+        <div style="text-align:right">
+          <div class="tag">Checklist</div>
+        </div>
+      </div>
+      <div style="height:12px"></div>
+      <div class="muted-sm">Revisa frenos, llantas, cadena, presión y cambios. Lleva repuestos básicos al taller confiable si hace falta.</div>
+      <div style="height:12px"></div>
+      <div class="progress"><i id="bikeProg" style="width:60%"></i></div>
+      <div style="height:8px"></div>
+      <div style="display:flex;gap:8px">
+        <button class="ghost" onclick="markBike()">Marcar mantenimiento</button>
+        <button class="ghost" onclick="scheduleBike()">Programar recordatorio</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <div style="font-weight:700">Consejos rápidos</div>
+      <ul class="muted-sm">
+        <li>Protege tu sueño: 7–8 h objetivo.</li>
+        <li>Entrena con regularidad: energía y claridad.</li>
+        <li>Enfoca 45–60 min por bloque en tareas profundas.</li>
+        <li>Comunica temprano cambios de planes a tu novia (no al revés).</li>
+      </ul>
+    </div>
+
+  </aside>
+
+  <footer class="muted-sm">Hecho especialmente para ti. Úsalo todos los días — las acciones pequeñas crean resultados grandes.</footer>
+
+</div>
+
+<!-- MODALS & EDITOR -->
+<div id="editorModal" style="display:none;position:fixed;inset:0;background:rgba(10,12,14,0.45);align-items:center;justify-content:center;">
+  <div style="width:90%;max-width:720px;background:white;border-radius:12px;padding:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <strong>Editar texto</strong>
+      <button onclick="closeEditor()" class="ghost">Cerrar</button>
+    </div>
+    <textarea id="editorArea" style="width:100%;height:220px;margin-top:12px;padding:12px;border-radius:8px;border:1px solid #e8ebef;font-family:inherit"></textarea>
+    <div style="display:flex;justify-content:flex-end;margin-top:8px">
+      <button class="btn" onclick="saveEditor()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ---------- Bootstrapping ---------- */
+  const hoy = new Date();
+  document.getElementById('fechaEdicion').innerText = hoy.toLocaleString();
+
+  // persist simple state to localStorage
+  const LS_KEY = 'plan_kendry_v1';
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(LS_KEY);
+      if(!raw) return;
+      const s = JSON.parse(raw);
+      // checklist
+      (s.checks||[]).forEach(id=>{
+        const el = document.querySelector('#checklist input[data-id="'+id+'"]');
+        if(el) el.checked = true;
+      });
+      // KPIs
+      if(s.ventasSemana !== undefined) document.getElementById('ventasSemana').value = s.ventasSemana;
+      if(s.horasKerter !== undefined) document.getElementById('horasKerter').value = s.horasKerter;
+      if(s.calidadNovia !== undefined) document.getElementById('calidadNovia').value = s.calidadNovia;
+      if(s.kerterProgress !== undefined) document.getElementById('kerterProgres').style.width = s.kerterProgress + '%';
+      if(s.bikeProg !== undefined) document.getElementById('bikeProg').style.width = s.bikeProg + '%';
+    }catch(e){}
+  }
+  loadState();
+
+  document.getElementById('guardarBtn').addEventListener('click',()=>{
+    saveState();
+    alert('Progreso guardado localmente ✔');
+  });
+  document.getElementById('imprimirBtn').addEventListener('click',()=>window.print());
+
+  function saveState(){
+    const checks = Array.from(document.querySelectorAll('#checklist input[type=checkbox]')).filter(i=>i.checked).map(i=>i.dataset.id);
+    const state = {
+      checks,
+      ventasSemana: Number(document.getElementById('ventasSemana').value||0),
+      horasKerter: Number(document.getElementById('horasKerter').value||0),
+      calidadNovia: Number(document.getElementById('calidadNovia').value||4),
+      kerterProgress: parseInt(document.getElementById('kerterProgres').style.width) || 34,
+      bikeProg: parseInt(document.getElementById('bikeProg').style.width) || 60
+    };
+    localStorage.setItem(LS_KEY, JSON.stringify(state));
+  }
+
+  /* ---------- Copy & Edit text blocks ---------- */
+  function copyText(id){
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(()=> {
+      const prev = document.getElementById(id);
+      prev.style.outline = '2px solid rgba(204,154,72,0.25)';
+      setTimeout(()=>prev.style.outline='none',700);
+    });
+  }
+  let activeEditId = null;
+  function editText(id){
+    activeEditId = id;
+    document.getElementById('editorArea').value = document.getElementById(id).innerText;
+    document.getElementById('editorModal').style.display = 'flex';
+  }
+  function closeEditor(){ document.getElementById('editorModal').style.display='none'; }
+  function saveEditor(){
+    if(!activeEditId) return closeEditor();
+    document.getElementById(activeEditId).innerText = document.getElementById('editorArea').value;
+    activeEditId = null;
+    closeEditor();
+  }
+
+  /* ---------- KPIs calculation ---------- */
+  document.getElementById('calcKPI').addEventListener('click',()=>{
+    const ventas = Number(document.getElementById('ventasSemana').value||0);
+    const horas = Number(document.getElementById('horasKerter').value||0);
+    const calidad = Number(document.getElementById('calidadNovia').value||4);
+    // simple scoring
+    let score = Math.min(100, Math.round(Math.min(1, horas/10)*40 + Math.min(1,ventas/10)*40 + Math.min(1,calidad/5)*20));
+    document.getElementById('kerterProgres').style.width = score + '%';
+    saveState();
+    alert('KPIs actualizados. Progreso Kerter: ' + score + '%');
+  });
+
+  /* ---------- Bike functions ---------- */
+  function markBike(){
+    document.getElementById('bikeProg').style.width = '100%';
+    saveState();
+    alert('Mantenimiento marcado ✔');
+  }
+  function scheduleBike(){
+    alert('Agendado: recordatorio mensual (usa tu calendario para confirmar).');
+  }
+
+  /* ---------- Pomodoro ---------- */
+  let pomTimer = null;
+  let pomRemaining = 0;
+  function formatTime(s){ return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); }
+  document.getElementById('startPom').addEventListener('click',()=>{
+    const mins = Math.max(1, Number(document.getElementById('pomTime').value||25));
+    pomRemaining = mins*60;
+    if(pomTimer) clearInterval(pomTimer);
+    pomTimer = setInterval(()=>{
+      if(pomRemaining<=0){ clearInterval(pomTimer); pomTimer=null; document.getElementById('pomDisplay').innerText = '¡Terminado!'; new Audio('data:audio/wav;base64,UklGRjQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=').play(); return; }
+      pomRemaining--; document.getElementById('pomDisplay').innerText = formatTime(pomRemaining);
+    },1000);
+  });
+  document.getElementById('stopPom').addEventListener('click',()=>{ if(pomTimer) clearInterval(pomTimer); pomTimer=null; document.getElementById('pomDisplay').innerText = '00:00'; });
+
+  /* ---------- Copy safe templates on load if missing ---------- */
+  // (already in DOM)
+  
+  /* ---------- small UX touches ---------- */
+  // Mark checklist changes to auto save
+  document.querySelectorAll('#checklist input[type=checkbox]').forEach(ch=>{
+    ch.addEventListener('change', ()=> saveState());
+  });
+
+  // prevent accidental data loss warning
+  window.addEventListener('beforeunload', function (e) {
+    // only if there is some state?
+    // navigator.sendBeacon could be used in production
+  });
+
+  // quick keyboard shortcuts
+  document.addEventListener('keydown', (e)=>{
+    if(e.ctrlKey && e.key ==='s'){ e.preventDefault(); saveState(); alert('Guardado rápido ✔'); }
+    if(e.key ==='p' && e.ctrlKey){ /* print handled */ }
+  });
+
+  // small onboarding: checklist hint
+  setTimeout(()=>{ if(!localStorage.getItem(LS_KEY)) alert('Bienvenido, Kendry — revisa la checklist y presiona Guardar para mantener tu progreso. Usa Ctrl+S para guardar rápido.'); },800);
+
+</script>
+</body>
+</html>
