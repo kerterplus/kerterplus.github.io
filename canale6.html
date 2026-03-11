@@ -1,374 +1,298 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<script>
+(function(){
+  var t=localStorage.getItem('kp_token')||sessionStorage.getItem('kp_token');
+  if(!t){ window.location.href='/login.html'; return; }
+  fetch('/api/auth/status',{headers:{Authorization:'Bearer '+t}})
+    .then(function(r){ return r.json(); })
+    .then(function(u){ if(!u||!u.is_active){ window.location.href='/sin-plan'; } })
+    .catch(function(){ window.location.href='/login.html'; });
+})();
+</script>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kerter+ · Canales</title>
-  
-  <!-- Fuentes y Librerías -->
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;700;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
-
   <style>
-    /* --- VARIABLES Y RESET (Base iOS del Código 1) --- */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    :root {
-      --bg: #090e14;
-      --bg-card: #131c2a;
-      --glass-bg: rgba(9, 14, 20, 0.8);
-      --glass-border: rgba(255, 255, 255, 0.1);
-      --accent: #2563eb;
-      --accent2: #3b82f6;
-      --text: #f1f5f9;
-      --muted: #64748b;
-      --live: #ef4444;
-      --border: #1e2a38;
-    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0a0d12;--bg2:#0e1218;--card:#131c2a;--border:#1e2a38;--accent:#2563eb;--accent2:#3b82f6;--text:#f1f5f9;--muted:#64748b;--live:#ef4444}
+    html,body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh}
+    .jw-settings-sharing,.jw-icon-pip,.jw-rightclick{display:none!important}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Barlow', sans-serif;
-      overflow-x: hidden;
-      padding-bottom: 90px;
-    }
+    .nav{height:52px;background:rgba(10,13,18,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:100}
+    .nav-logo{font-family:'Outfit',sans-serif;font-size:20px;font-weight:900;color:var(--text);text-decoration:none;letter-spacing:-.5px}
+    .nav-logo span{color:var(--accent2)}
+    .nav-links{display:flex;align-items:center;gap:20px}
+    .nav-link{color:var(--muted);font-size:13px;font-weight:600;text-decoration:none;transition:color .2s}
+    .nav-link:hover{color:var(--text)}
+    .nav-link.active{color:var(--text)}
+    .nav-right{display:flex;align-items:center;gap:12px}
+    .nav-user{font-size:12px;color:var(--muted)}
+    .btn-logout{background:transparent;border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:6px;font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
+    .btn-logout:hover{border-color:var(--text);color:var(--text)}
 
-    .glass-effect {
-      background: var(--glass-bg);
-      backdrop-filter: saturate(180%) blur(55px);
-      -webkit-backdrop-filter: saturate(180%) blur(55px);
-      border: 1px solid var(--glass-border);
-    }
+    .hero{display:grid;grid-template-columns:1fr 580px;background:var(--bg)}
+    @media(max-width:960px){.hero{grid-template-columns:1fr}}
 
-    /* --- NAVEGACIÓN SUPERIOR --- */
-    .top-bar {
-      position: fixed; top: 0; left: 0; right: 0;
-      height: 70px; display: flex; align-items: center; justify-content: space-between;
-      padding: 0 4%; z-index: 100; border-bottom: 1px solid var(--glass-border);
-    }
-    .top-left, .top-right { display: flex; align-items: center; gap: 15px; }
-    .logo { font-family: 'Fredoka One', sans-serif; font-size: 26px; color: #fff; text-decoration: none; letter-spacing: 1px; }
-    .logo span { color: var(--accent2); }
+    .hero-info{padding:32px;display:flex;flex-direction:column;justify-content:flex-end;min-height:320px}
+    .hero-label{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:12px}
+    .hero-title{font-family:'Outfit',sans-serif;font-size:28px;font-weight:900;line-height:1.15;margin-bottom:10px}
+    .hero-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .hero-meta-item{font-size:12px;color:var(--muted)}
+    .live-badge{display:inline-flex;align-items:center;gap:5px;background:var(--live);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:4px;letter-spacing:1.2px}
+    .live-dot{width:5px;height:5px;background:#fff;border-radius:50%;animation:ldot 1.4s infinite}
+    @keyframes ldot{0%,100%{opacity:1}50%{opacity:.2}}
+    .hero-empty-title{font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;color:var(--muted);opacity:.25}
 
-    .icon-btn {
-      background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
-      border-radius: 12px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
-      color: #fff; cursor: pointer; transition: 0.3s;
-    }
-    .icon-btn svg { width: 22px; height: 22px; stroke: currentColor; stroke-width: 2; fill: none; }
+    .hero-player{position:relative;background:#000;overflow:hidden}
+    .hero-player::before{content:'';display:block;padding-top:56.25%}
+    #player-container{position:absolute;top:0;left:0;right:0;bottom:0;background:#000}
+    #jwp{width:100%;height:100%}
 
-    /* --- HERO / REPRODUCTOR (Fusión de Código 1 y 2) --- */
-    .hero {
-      margin-top: 70px;
-      display: grid;
-      grid-template-columns: 1fr 580px;
-      background: #000;
-      border-bottom: 1px solid var(--border);
-    }
+    .play-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:16px 30px;display:flex;align-items:center;gap:12px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:18px;font-weight:600;color:#fff;border-radius:999px;background:rgba(255,255,255,0.12);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid rgba(255,255,255,0.25);box-shadow:0 8px 20px rgba(0,0,0,0.4),inset 0 1px 0 rgba(255,255,255,0.3);cursor:pointer;z-index:5;transition:transform .25s,box-shadow .25s;white-space:nowrap}
+    .play-overlay:hover{transform:translate(-50%,-50%) scale(1.05)}
+    .play-overlay:active{transform:translate(-50%,-50%) scale(0.95)}
+    .play-overlay.hidden{display:none}
+    .play-icon{width:0;height:0;border-style:solid;border-width:12px 0 12px 20px;border-color:transparent transparent transparent #fff;filter:drop-shadow(0 0 6px rgba(255,255,255,0.6))}
 
-    .hero-info { padding: 32px; display: flex; flex-direction: column; justify-content: center; min-height: 320px; }
-    .hero-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 12px; }
-    .hero-title { font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 900; line-height: 1.1; margin-bottom: 15px; }
-    
-    .live-badge {
-      display: inline-flex; align-items: center; gap: 6px; background: var(--live); color: #fff; 
-      font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; letter-spacing: 1px; width: fit-content;
-    }
-    .live-dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; animation: ldot 1.4s infinite; }
-    @keyframes ldot { 0%,100% { opacity: 1 } 50% { opacity: .2 } }
+    .preloader{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:none;width:54px;height:54px;border:4px solid rgba(255,255,255,0.2);border-top:4px solid #fff;border-radius:50%;animation:spin 1s linear infinite;z-index:6}
+    @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
 
-    .hero-player { position: relative; background: #000; overflow: hidden; aspect-ratio: 16/9; }
-    #player-container { position: absolute; inset: 0; }
+    .player-placeholder{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;background:#050810}
+    .player-placeholder-icon{font-size:48px;opacity:.07}
 
-    /* --- FILTROS (Código 2) --- */
-    .filters-wrap { padding: 20px 4%; display: flex; align-items: center; gap: 8px; overflow-x: auto; scrollbar-width: none; }
-    .filters-wrap::-webkit-scrollbar { display: none; }
-    .filter-btn {
-      padding: 8px 18px; border-radius: 99px; font-size: 12px; font-weight: 700; cursor: pointer;
-      border: 1px solid var(--border); background: transparent; color: var(--muted); white-space: nowrap; transition: 0.2s;
-    }
-    .filter-btn.active { background: #fff; color: #000; border-color: #fff; }
+    .player-error{display:none;position:absolute;inset:0;background:rgba(0,0,0,.8);align-items:center;justify-content:center;flex-direction:column;gap:8px;z-index:7;text-align:center;padding:20px}
+    .player-error.show{display:flex}
+    .player-error-icon{font-size:32px;opacity:.35}
+    .player-error-msg{font-size:13px;font-weight:600;color:var(--muted)}
 
-    /* --- LISTA DE CANALES (INTERIOR 100% Código 2) --- */
-    .channels-section { padding: 0 0 40px; }
-    .channels-header-cols { display: grid; grid-template-columns: 200px 1fr 1fr; padding: 10px 4%; margin-bottom: 6px; }
-    .channels-col-label { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .filters-wrap{padding:16px 24px 0;display:flex;align-items:center;gap:8px;overflow-x:auto;scrollbar-width:none}
+    .filters-wrap::-webkit-scrollbar{display:none}
+    .filter-btn{padding:7px 16px;border-radius:99px;font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);white-space:nowrap;transition:all .2s;flex-shrink:0}
+    .filter-btn:hover{color:var(--text);border-color:var(--muted)}
+    .filter-btn.active{background:var(--text);color:var(--bg);border-color:var(--text)}
 
-    .ch-row { display: grid; grid-template-columns: 200px 1fr 1fr; align-items: stretch; cursor: pointer; border-top: 1px solid var(--border); transition: 0.2s; position: relative; }
-    .ch-row:hover { background: rgba(255,255,255,0.03); }
-    .ch-row.active { background: rgba(37,99,235,0.1); }
-    .ch-row.active::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--accent2); }
+    .channels-section{padding:16px 0 40px}
+    .channels-header-cols{display:grid;grid-template-columns:200px 1fr 1fr;gap:0;padding:0 24px;margin-bottom:6px}
+    .channels-col-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+    .ch-row{display:grid;grid-template-columns:200px 1fr 1fr;gap:0;align-items:stretch;cursor:pointer;border-top:1px solid var(--border);transition:background .15s;position:relative}
+    .ch-row:hover{background:rgba(255,255,255,0.03)}
+    .ch-row.active{background:rgba(37,99,235,0.08)}
+    .ch-row.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent2)}
+    .ch-cell-id{display:flex;align-items:center;gap:12px;padding:14px 16px 14px 24px}
+    .ch-num{font-size:11px;color:var(--muted);font-weight:700;width:28px;flex-shrink:0;text-align:right}
+    .ch-logo-wrap{width:44px;height:44px;border-radius:8px;overflow:hidden;background:var(--card);border:1px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+    .ch-logo-wrap img{width:100%;height:100%;object-fit:cover}
+    .ch-ph{font-size:10px;font-weight:700;color:var(--muted)}
+    .ch-name{font-size:13px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px}
+    .ch-row.active .ch-name{color:var(--accent2)}
+    .ch-cell-prog{padding:14px 16px;border-left:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;gap:3px}
+    .ch-prog-title{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .ch-prog-time{font-size:11px;color:var(--muted)}
+    .ch-empty-prog{color:var(--muted);opacity:.4}
+    .no-channels{padding:48px 24px;text-align:center;color:var(--muted);font-size:14px}
 
-    .ch-cell-id { display: flex; align-items: center; gap: 12px; padding: 14px 4%; }
-    .ch-num { font-size: 11px; color: var(--muted); font-weight: 700; width: 25px; text-align: right; }
-    .ch-logo-wrap { width: 44px; height: 44px; border-radius: 8px; overflow: hidden; background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .ch-logo-wrap img { width: 100%; height: 100%; object-fit: cover; }
-    .ch-name { font-size: 14px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-    .ch-cell-prog { padding: 14px 16px; border-left: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
-    .ch-prog-title { font-size: 13px; font-weight: 600; color: var(--text); }
-    .ch-prog-time { font-size: 11px; color: var(--muted); margin-top: 2px; }
-
-    /* --- SIDEBARS --- */
-    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; pointer-events: none; transition: 0.3s; }
-    .overlay.active { opacity: 1; pointer-events: auto; }
-    .sidebar { position: fixed; top: 0; bottom: 0; width: 300px; z-index: 1001; padding: 25px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    .sidebar-left { left: 0; transform: translateX(-100%); }
-    .sidebar-right { right: 0; transform: translateX(100%); }
-    .sidebar.active { transform: translateX(0); }
-    .side-link { display: flex; align-items: center; gap: 12px; color: #ddd; text-decoration: none; padding: 14px; border-radius: 12px; font-weight: 600; margin-bottom: 5px; }
-    .side-link.active { background: rgba(255,255,255,0.1); color: #fff; }
-
-    /* --- NAV INFERIOR --- */
-    .bottom-nav {
-      position: fixed; bottom: 0; left: 0; width: 100%; height: 75px;
-      display: none; justify-content: space-around; align-items: center;
-      z-index: 100; background: var(--glass-bg); backdrop-filter: blur(20px); border-top: 1px solid var(--glass-border);
-      padding-bottom: env(safe-area-inset-bottom);
-    }
-    .b-nav-item { color: var(--muted); text-decoration: none; display: flex; flex-direction: column; align-items: center; }
-    .b-nav-item.active { color: #fff; }
-
-    /* --- UTILS --- */
-    .preloader { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; display: none; }
-    @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
-
-    @media(max-width:960px){
-      .hero { grid-template-columns: 1fr; }
-      .hero-info { min-height: 200px; padding: 24px; }
-      .bottom-nav { display: flex; }
-      .top-bar { padding: 0 20px; }
-    }
     @media(max-width:768px){
-      .ch-row { grid-template-columns: 160px 1fr; }
-      .channels-header-cols { grid-template-columns: 160px 1fr; }
-      .ch-cell-prog:last-child, .channels-col-label:last-child { display: none; }
+      .hero{grid-template-columns:1fr}
+      .ch-row{grid-template-columns:160px 1fr}
+      .ch-cell-prog:last-child{display:none}
+      .channels-header-cols{grid-template-columns:160px 1fr}
+      .channels-col-label:last-child{display:none}
     }
   </style>
 </head>
 <body>
+<nav class="nav">
+  <a href="/inicio" class="nav-logo">kerter<span>+</span></a>
+  <div class="nav-links">
+    <a href="/inicio" class="nav-link">Inicio</a>
+    <a href="/canales" class="nav-link active">En vivo</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-user" id="nav-user"></span>
+    <button class="btn-logout" onclick="logout()">Salir</button>
+  </div>
+</nav>
 
-  <!-- BARRA SUPERIOR -->
-  <nav class="top-bar glass-effect">
-    <div class="top-left">
-      <button class="icon-btn" onclick="toggleSidebar('left')">
-        <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-      </button>
-      <a href="/inicio" class="logo">kerter<span>+</span></a>
+<div class="hero">
+  <div id="hero-info-wrap">
+    <div class="hero-info" id="hero-empty-state">
+      <div class="hero-label">Estas viendo</div>
+      <div class="hero-empty-title">Selecciona un canal</div>
     </div>
-    <div class="top-right">
-      <button class="icon-btn" onclick="toggleSidebar('right')" style="border-radius: 50%;">
-        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-      </button>
-    </div>
-  </nav>
-
-  <!-- SECCIÓN REPRODUCTOR -->
-  <div class="hero">
-    <div id="hero-info-wrap">
-      <div class="hero-info" id="hero-empty-state">
-        <div class="hero-label">En directo</div>
-        <div class="hero-title" style="opacity: 0.3">Selecciona un canal</div>
-      </div>
-      <div class="hero-info" id="hero-info" style="display:none">
-        <div class="hero-label">Estas viendo</div>
-        <div class="hero-title" id="hero-title">Nombre del Canal</div>
-        <div class="live-badge"><span class="live-dot"></span> EN VIVO</div>
-      </div>
-    </div>
-    <div class="hero-player">
-      <div id="player-container">
-        <div id="jwp"></div>
-        <div class="preloader" id="preloader"></div>
+    <div class="hero-info" id="hero-info" style="display:none">
+      <div class="hero-label">Estas viendo</div>
+      <div class="hero-title" id="hero-title"></div>
+      <div class="hero-meta">
+        <span class="live-badge"><span class="live-dot"></span>EN VIVO</span>
+        <span class="hero-meta-item" id="hero-tags"></span>
       </div>
     </div>
   </div>
-
-  <!-- FILTROS -->
-  <div class="filters-wrap" id="filters-wrap">
-    <button class="filter-btn active" onclick="setFilter('',this)">Todos los canales</button>
-  </div>
-
-  <!-- LISTA DE CANALES -->
-  <div class="channels-section">
-    <div class="channels-header-cols">
-      <div class="channels-col-label">Canal</div>
-      <div class="channels-col-label">Ahora</div>
-      <div class="channels-col-label">A continuación</div>
-    </div>
-    <div id="channels-list">
-      <div style="padding: 40px; text-align: center; color: var(--muted)">Cargando parrilla...</div>
-    </div>
-  </div>
-
-  <!-- OVERLAY Y MENÚS -->
-  <div class="overlay" id="overlay" onclick="closeAll()"></div>
-
-  <aside class="sidebar sidebar-left glass-effect" id="sidebar-left">
-    <div style="margin-top: 40px">
-      <a href="/inicio" class="side-link"><svg style="width:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg> Inicio</a>
-      <a href="/canales" class="side-link active"><svg style="width:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg> Canales</a>
-      <a href="/repeticiones" class="side-link"><svg style="width:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> Repeticiones</a>
-    </div>
-  </aside>
-
-  <aside class="sidebar sidebar-right glass-effect" id="sidebar-right">
-    <div style="text-align: center; margin-top: 40px;">
-      <div style="width: 70px; height: 70px; background: var(--accent); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;">
-        <svg style="width: 35px; color: #fff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+  <div class="hero-player">
+    <div id="player-container">
+      <div class="player-placeholder" id="player-placeholder"><div class="player-placeholder-icon">&#x1F4FA;</div></div>
+      <div id="jwp"></div>
+      
+      <div class="preloader" id="preloader"></div>
+      <div class="player-error" id="player-error">
+        <div class="player-error-icon">&#x26A0;</div>
+        <div class="player-error-msg" id="player-error-msg">No se pudo cargar el canal</div>
       </div>
-      <h3 id="nav-user" style="font-weight: 800;">Usuario</h3>
-      <p style="font-size: 12px; color: var(--muted); margin-top: 5px;">Suscripción Activa</p>
-      <hr style="border: 0; border-top: 1px solid var(--border); margin: 25px 0;">
-      <button onclick="logout()" style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid #ef4444; background: transparent; color: #ef4444; font-weight: 700; cursor: pointer;">Cerrar Sesión</button>
     </div>
-  </aside>
+  </div>
+</div>
 
-  <!-- NAV INFERIOR (MÓVIL) -->
-  <nav class="bottom-nav">
-    <a href="/inicio" class="b-nav-item"><svg style="width:24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></a>
-    <a href="/canales" class="b-nav-item active"><svg style="width:24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg></a>
-    <a href="/repeticiones" class="b-nav-item"><svg style="width:24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></a>
-  </nav>
+<div class="filters-wrap" id="filters-wrap">
+  <button class="filter-btn active" onclick="setFilter('',this)">Top</button>
+</div>
 
-  <script>
-    jwplayer.key='XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
-    const TOKEN = localStorage.getItem('kp_token') || sessionStorage.getItem('kp_token');
-    let allChannels = [], activeChannel = null, playerInst = null;
+<div class="channels-section">
+  <div class="channels-header-cols">
+    <div class="channels-col-label">Canal</div>
+    <div class="channels-col-label">Ahora</div>
+    <div class="channels-col-label">A continuacion</div>
+  </div>
+  <div id="channels-list"><div class="no-channels">Cargando canales...</div></div>
+</div>
 
-    async function init() {
-      // Info Usuario
-      if(TOKEN){
-        try {
-          const sr = await fetch('/api/auth/status', { headers: { Authorization: 'Bearer ' + TOKEN } });
-          const su = await sr.json();
-          if(su.full_name || su.username) document.getElementById('nav-user').textContent = su.full_name || su.username;
-        } catch(e) {}
-      }
+<script>
+jwplayer.key='XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
+var TOKEN=localStorage.getItem('kp_token')||sessionStorage.getItem('kp_token');
+var allChannels=[],activeChannel=null,activeFilter='',playerInst=null;
 
-      // Canales
-      try {
-        const r = await fetch('/api/channels', { headers: { Authorization: 'Bearer ' + TOKEN } });
-        allChannels = await r.json();
-        buildFilters();
-        renderChannels(allChannels);
-      } catch(e) {
-        document.getElementById('channels-list').innerHTML = '<div style="padding:40px; text-align:center;">Error de conexión.</div>';
-      }
+async function init(){
+  if(!TOKEN){ window.location.href='/login.html'; return; }
+  try{
+    var sr=await fetch('/api/auth/status',{headers:{Authorization:'Bearer '+TOKEN}});
+    var su=await sr.json();
+    if(su.full_name||su.username) document.getElementById('nav-user').textContent=su.full_name||su.username;
+  }catch(e){}
+  try{
+    var r=await fetch('/api/channels',{headers:{Authorization:'Bearer '+TOKEN}});
+    allChannels=await r.json();
+    buildFilters();
+    renderChannels(allChannels);
+  }catch(e){
+    document.getElementById('channels-list').innerHTML='<div class="no-channels">Error cargando canales</div>';
+  }
+}
+
+function buildFilters(){
+  var tags=[];
+  allChannels.forEach(function(c){
+    if(c.tags) c.tags.split(',').forEach(function(t){ var t2=t.trim(); if(t2&&tags.indexOf(t2)===-1) tags.push(t2); });
+  });
+  var wrap=document.getElementById('filters-wrap');
+  tags.forEach(function(tag){
+    var btn=document.createElement('button');
+    btn.className='filter-btn';
+    btn.textContent=tag.charAt(0).toUpperCase()+tag.slice(1);
+    btn.onclick=function(){ setFilter(tag,btn); };
+    wrap.appendChild(btn);
+  });
+}
+
+function setFilter(tag,btn){
+  activeFilter=tag;
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var filtered=tag?allChannels.filter(function(c){ return c.tags&&c.tags.toLowerCase().includes(tag.toLowerCase()); }):allChannels;
+  renderChannels(filtered);
+  if(activeChannel){ var row=document.getElementById('row-'+activeChannel.id); if(row) row.classList.add('active'); }
+}
+
+function renderChannels(list){
+  var el=document.getElementById('channels-list');
+  if(!list.length){ el.innerHTML='<div class="no-channels">No hay canales en esta categoria</div>'; return; }
+  el.innerHTML=list.map(function(c,i){
+    var logo=c.logo?'<img src="'+c.logo+'" alt="'+c.name+'">'
+                   :'<span class="ch-ph">TV</span>';
+    var isActive=activeChannel&&activeChannel.id===c.id;
+    return '<div class="ch-row'+(isActive?' active':'')+'" id="row-'+c.id+'" onclick="selectById('+c.id+')">'+
+      '<div class="ch-cell-id">'+
+        '<div class="ch-num">'+(i+1)+'</div>'+
+        '<div class="ch-logo-wrap">'+logo+'</div>'+
+        '<div class="ch-name">'+c.name+'</div>'+
+      '</div>'+
+      '<div class="ch-cell-prog"><div class="ch-prog-title ch-empty-prog">En vivo</div><div class="ch-prog-time">Ahora</div></div>'+
+      '<div class="ch-cell-prog"><div class="ch-prog-title ch-empty-prog">-</div><div class="ch-prog-time"></div></div>'+
+    '</div>';
+  }).join('');
+}
+
+function selectById(id){
+  var c=allChannels.find(function(x){ return x.id===id; }); if(c) selectChannel(c);
+}
+
+function selectChannel(c){
+  if(activeChannel&&activeChannel.id===c.id) return;
+  activeChannel=c;
+  document.querySelectorAll('.ch-row').forEach(function(r){ r.classList.remove('active'); });
+  var row=document.getElementById('row-'+c.id);
+  if(row){ row.classList.add('active'); row.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+  document.getElementById('hero-empty-state').style.display='none';
+  document.getElementById('hero-info').style.display='flex';
+  document.getElementById('hero-title').textContent=c.name;
+  document.getElementById('hero-tags').textContent=c.tags||'';
+  stopPlayer();
+  document.getElementById('player-placeholder').style.display='none';
+  startPlay(c);
+}
+
+function stopPlayer(){
+  hideError();
+  document.getElementById('preloader').style.display='none';
+  if(playerInst){ try{ playerInst.remove(); }catch(e){} playerInst=null; }
+  document.getElementById('jwp').innerHTML='';
+}
+
+function startPlay(c){
+  hideError();
+  document.getElementById('preloader').style.display='block';
+
+  if(playerInst){ try{ playerInst.remove(); }catch(e){} playerInst=null; }
+  document.getElementById('jwp').innerHTML='';
+
+  var sources=[];
+  if(c.player_type==='dash'){
+    var keys=[];
+    for(var i=1;i<=6;i++){
+      var kid=c['drm_key'+i+'_id'], key=c['drm_key'+i];
+      if(kid&&key) keys.push({ keyId:kid, key:key });
     }
+    var src={ type:'dash', file:c.stream_url, label:'0' };
+    if(keys.length>0) src.drm={ clearkey:keys };
+    sources.push(src);
+  } else {
+    sources.push({ type:'hls', file:c.stream_url });
+  }
 
-    function buildFilters() {
-      const tags = [];
-      allChannels.forEach(c => {
-        if(c.tags) c.tags.split(',').forEach(t => { 
-          const t2 = t.trim(); 
-          if(t2 && !tags.includes(t2)) tags.push(t2); 
-        });
-      });
-      const wrap = document.getElementById('filters-wrap');
-      tags.forEach(tag => {
-        const btn = document.createElement('button');
-        btn.className = 'filter-btn';
-        btn.textContent = tag.charAt(0).toUpperCase() + tag.slice(1);
-        btn.onclick = () => setFilter(tag, btn);
-        wrap.appendChild(btn);
-      });
-    }
+  playerInst=jwplayer('jwp');
+  playerInst.setup({
+    playlist:[{ sources:sources }],
+    width:'100%',
+    height:'100%',
+    aspectratio:'16:9',
+    autostart:true,
+    logo:{ file:'', position:'bottom-right' }
+  });
+  playerInst.on('firstFrame',function(){
+    document.getElementById('preloader').style.display='none';
+  });
+  playerInst.on('error',function(e){
+    document.getElementById('preloader').style.display='none';
+    showError(e.message||'Error de reproduccion');
+  });
+}
 
-    function setFilter(tag, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filtered = tag ? allChannels.filter(c => c.tags && c.tags.toLowerCase().includes(tag.toLowerCase())) : allChannels;
-      renderChannels(filtered);
-    }
-
-    function renderChannels(list) {
-      const el = document.getElementById('channels-list');
-      if(!list.length) { el.innerHTML = '<div style="padding:40px; text-align:center;">No hay canales.</div>'; return; }
-      
-      el.innerHTML = list.map((c, i) => `
-        <div class="ch-row ${activeChannel?.id === c.id ? 'active' : ''}" id="row-${c.id}" onclick="selectChannel(${c.id})">
-          <div class="ch-cell-id">
-            <div class="ch-num">${i + 1}</div>
-            <div class="ch-logo-wrap">${c.logo ? `<img src="${c.logo}">` : '<span style="font-size:10px">TV</span>'}</div>
-            <div class="ch-name">${c.name}</div>
-          </div>
-          <div class="ch-cell-prog">
-            <div class="ch-prog-title">En directo</div>
-            <div class="ch-prog-time">Ahora</div>
-          </div>
-          <div class="ch-cell-prog">
-            <div class="ch-prog-title" style="opacity:0.4">-</div>
-            <div class="ch-prog-time"></div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function selectChannel(id) {
-      const c = allChannels.find(x => x.id === id);
-      if(!c) return;
-      activeChannel = c;
-      
-      document.querySelectorAll('.ch-row').forEach(r => r.classList.remove('active'));
-      document.getElementById('row-' + c.id).classList.add('active');
-      
-      document.getElementById('hero-empty-state').style.display = 'none';
-      document.getElementById('hero-info').style.display = 'flex';
-      document.getElementById('hero-title').textContent = c.name;
-      
-      startPlay(c);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function startPlay(c) {
-      document.getElementById('preloader').style.display = 'block';
-      if(playerInst) { playerInst.remove(); playerInst = null; }
-      document.getElementById('jwp').innerHTML = '';
-
-      const sources = [];
-      if(c.player_type === 'dash'){
-        const keys = [];
-        for(let i=1; i<=6; i++){
-          if(c['drm_key'+i+'_id'] && c['drm_key'+i]) {
-            keys.push({ keyId: c['drm_key'+i+'_id'], key: c['drm_key'+i] });
-          }
-        }
-        const src = { type: 'dash', file: c.stream_url };
-        if(keys.length > 0) src.drm = { clearkey: keys };
-        sources.push(src);
-      } else {
-        sources.push({ type: 'hls', file: c.stream_url });
-      }
-
-      playerInst = jwplayer('jwp').setup({
-        playlist: [{ sources }],
-        width: '100%',
-        height: '100%',
-        autostart: true
-      });
-
-      playerInst.on('firstFrame', () => document.getElementById('preloader').style.display = 'none');
-      playerInst.on('error', e => {
-        document.getElementById('preloader').style.display = 'none';
-        alert("Error al cargar stream: " + e.message);
-      });
-    }
-
-    // INTERFAZ
-    function toggleSidebar(side) {
-      document.getElementById('overlay').classList.add('active');
-      document.getElementById('sidebar-' + side).classList.add('active');
-    }
-    function closeAll() {
-      document.getElementById('overlay').classList.remove('active');
-      document.getElementById('sidebar-left').classList.remove('active');
-      document.getElementById('sidebar-right').classList.remove('active');
-    }
-    function logout() { localStorage.clear(); sessionStorage.clear(); window.location.href='/login.html'; }
-
-    init();
-  </script>
+function showError(msg){ var e=document.getElementById('player-error'); if(msg) document.getElementById('player-error-msg').textContent=msg; e.classList.add('show'); }
+function hideError(){ document.getElementById('player-error').classList.remove('show'); }
+function logout(){ localStorage.removeItem('kp_token'); sessionStorage.removeItem('kp_token'); window.location.href='/login.html'; }
+init();
+</script>
 </body>
 </html>
