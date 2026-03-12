@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Panel de Repeticiones</title>
     <style>
-        /* ESTILO IOS 16 */
+        /* ESTILO IOS 16 - MODO OSCURO */
         :root {
-            --bg-color: #F2F2F7;
-            --card-bg: #FFFFFF;
-            --ios-blue: #007AFF;
-            --ios-red: #FF3B30;
-            --text-main: #000000;
-            --text-sec: #8E8E93;
+            --bg-color: #000000;
+            --card-bg: #1C1C1E;
+            --input-bg: #2C2C2E;
+            --ios-blue: #0A84FF;
+            --ios-red: #FF453A;
+            --text-main: #FFFFFF;
+            --text-sec: #EBEBF5;
             --border-rad: 16px;
         }
 
@@ -26,9 +27,9 @@
         }
 
         header {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -36,7 +37,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         h1 {
@@ -46,15 +47,12 @@
             letter-spacing: -0.5px;
         }
 
-        .header-buttons {
-            display: flex;
-            gap: 10px;
-        }
+        .header-buttons { display: flex; gap: 10px; }
 
         button {
             border: none;
             font-family: inherit;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             border-radius: 12px;
@@ -64,46 +62,69 @@
         button:active { transform: scale(0.96); }
 
         .btn-primary { background: var(--ios-blue); color: white; padding: 8px 16px; }
-        .btn-copy { background: #34C759; color: white; padding: 8px 16px; }
-        .btn-danger { background: rgba(255, 59, 48, 0.1); color: var(--ios-red); padding: 8px 16px; }
-        .btn-edit { background: rgba(0, 122, 255, 0.1); color: var(--ios-blue); padding: 8px 16px; }
+        .btn-copy { background: #32D74B; color: black; padding: 8px 16px; font-weight: 700; }
+        .btn-danger { background: rgba(255, 69, 58, 0.15); color: var(--ios-red); padding: 8px 16px; }
+        .btn-edit { background: rgba(10, 132, 255, 0.15); color: var(--ios-blue); padding: 8px 16px; }
 
-        .container { padding: 20px; max-width: 800px; margin: 0 auto; }
+        /* CONTENEDOR TIPO GRID (CUADRÍCULA AUTOMÁTICA) */
+        .container { 
+            padding: 20px; 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            display: grid;
+            /* Aquí ocurre la magia: si hay espacio caben 3 o 4, si es celular cabe 1 */
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
 
         .card {
             background: var(--card-bg);
             border-radius: var(--border-rad);
-            padding: 16px;
-            margin-bottom: 16px;
             display: flex;
-            gap: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            align-items: center;
+            flex-direction: column;
+            overflow: hidden; /* Para que la imagen respete los bordes curvos */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .card img {
-            width: 90px;
-            height: 90px;
-            border-radius: 12px;
+            width: 100%;
+            aspect-ratio: 16/9; /* Formato panorámico de video */
             object-fit: cover;
-            background: #E5E5EA;
+            background: #2C2C2E;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .card-info { flex: 1; }
-        .card-info h3 { margin: 0 0 4px 0; font-size: 18px; font-weight: 600; }
-        .card-info p { margin: 2px 0; font-size: 14px; color: var(--text-sec); }
-        .card-info .league { display: inline-block; background: #E5E5EA; padding: 2px 8px; border-radius: 6px; font-size: 12px; font-weight: 500; color: #333; margin-top: 4px;}
+        .card-info { 
+            padding: 16px; 
+            flex: 1; 
+        }
+        
+        .card-info h3 { margin: 0 0 6px 0; font-size: 17px; font-weight: 600; line-height: 1.3; }
+        .card-info p { margin: 4px 0; font-size: 14px; color: rgba(235, 235, 245, 0.6); }
+        .card-info .league { 
+            display: inline-block; 
+            background: var(--input-bg); 
+            padding: 4px 10px; 
+            border-radius: 6px; 
+            font-size: 12px; 
+            font-weight: 600; 
+            color: var(--ios-blue); 
+            margin-top: 8px;
+        }
 
         .card-actions {
+            padding: 0 16px 16px 16px;
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
+        
+        .card-actions button { flex: 1; padding: 10px; } /* Los botones ocupan 50% cada uno */
 
-        /* Modal Styles */
+        /* Modal Styles Oscuro */
         .modal-overlay {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
             display: none; justify-content: center; align-items: flex-end;
             z-index: 1000;
             opacity: 0; transition: opacity 0.3s;
@@ -120,36 +141,36 @@
             transform: translateY(100%);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             max-height: 90vh; overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .modal-overlay.active .modal-content { transform: translateY(0); }
 
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .modal-header h2 { margin: 0; font-size: 20px; }
-        .btn-close { background: #E5E5EA; color: #8E8E93; border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; font-size: 20px; padding: 0; }
+        .btn-close { background: var(--input-bg); color: var(--text-sec); border-radius: 50%; width: 32px; height: 32px; display: flex; justify-content: center; align-items: center; font-size: 20px; padding: 0; }
 
         .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; font-size: 14px; color: var(--text-sec); margin-bottom: 6px; font-weight: 500; }
+        .form-group label { display: block; font-size: 14px; color: rgba(235, 235, 245, 0.6); margin-bottom: 6px; font-weight: 500; }
         .form-group input { 
             width: 100%; box-sizing: border-box;
-            background: #F2F2F7; border: none; padding: 14px;
+            background: var(--input-bg); border: 1px solid rgba(255,255,255,0.05); padding: 14px;
             border-radius: 12px; font-size: 16px; color: var(--text-main); font-family: inherit;
         }
-        .form-group input:focus { outline: 2px solid var(--ios-blue); }
+        .form-group input:focus { outline: 2px solid var(--ios-blue); border-color: transparent; }
 
         .modal-footer { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
         .modal-footer button { width: 100%; padding: 14px; font-size: 17px; }
+        .btn-cancel { background: var(--input-bg); color: var(--text-main); }
 
-        /* Pantalla de carga */
-        #loading { text-align: center; color: var(--text-sec); padding: 40px; font-size: 16px; }
+        #loading { text-align: center; color: var(--text-sec); padding: 40px; font-size: 16px; grid-column: 1 / -1; }
 
-        /* Botón flotante versión móvil */
         .fab {
-            position: fixed; bottom: 20px; right: 20px;
-            width: 56px; height: 56px; border-radius: 28px;
+            position: fixed; bottom: 24px; right: 24px;
+            width: 60px; height: 60px; border-radius: 30px;
             background: var(--ios-blue); color: white;
             display: flex; justify-content: center; align-items: center;
-            font-size: 30px; box-shadow: 0 4px 12px rgba(0,122,255,0.4);
+            font-size: 32px; box-shadow: 0 4px 15px rgba(10, 132, 255, 0.5);
             z-index: 90; cursor: pointer; border: none;
         }
     </style>
@@ -159,8 +180,8 @@
     <header>
         <h1>Repeticiones</h1>
         <div class="header-buttons">
-            <button class="btn-copy" onclick="copyJSON()">Copiar JSON Final</button>
-            <button class="btn-primary" onclick="openModal()">+ Añadir</button>
+            <button class="btn-copy" onclick="copyJSON()">Copiar Código JSON</button>
+            <button class="btn-primary" onclick="openModal()">+ Nuevo</button>
         </div>
     </header>
 
@@ -202,7 +223,7 @@
 
             <div class="modal-footer">
                 <button class="btn-primary" onclick="saveItem()">Guardar Partido</button>
-                <button class="btn-danger" style="background: #E5E5EA; color: #333;" onclick="closeModal()">Cancelar</button>
+                <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
             </div>
         </div>
     </div>
@@ -217,7 +238,6 @@
         // Cargar los datos al iniciar
         async function loadData() {
             try {
-                // Añadimos un parámetro de tiempo para evitar el caché
                 const response = await fetch(`${JSON_URL}?t=${new Date().getTime()}`);
                 if (!response.ok) throw new Error("Error en la red");
                 matches = await response.json();
@@ -229,7 +249,7 @@
             }
         }
 
-        // Mostrar las tarjetas en la pantalla
+        // Mostrar las tarjetas en la cuadrícula
         function renderList() {
             const container = document.getElementById('app');
             container.innerHTML = '';
@@ -243,7 +263,7 @@
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
-                    <img src="${match.img}" alt="Miniatura" onerror="this.src='https://via.placeholder.com/90x90?text=Error+Img'">
+                    <img src="${match.img}" alt="Miniatura" onerror="this.src='https://via.placeholder.com/600x337/2C2C2E/8E8E93?text=Sin+Imagen'">
                     <div class="card-info">
                         <h3>${match.title}</h3>
                         <p>📅 ${match.fecha}</p>
@@ -258,7 +278,7 @@
             });
         }
 
-        // Abrir Modal (Si index es -1 es Nuevo, si no, es Editar)
+        // Abrir Modal
         function openModal(index = -1) {
             editingIndex = index;
             const titleEl = document.getElementById('modalTitle');
@@ -289,7 +309,6 @@
             modal.classList.remove('active');
         }
 
-        // Guardar en la memoria y actualizar la lista visual
         function saveItem() {
             const title = document.getElementById('inputTitle').value.trim();
             const fecha = document.getElementById('inputFecha').value.trim();
@@ -305,10 +324,8 @@
             const newMatch = { title, fecha, league, img, url };
 
             if (editingIndex > -1) {
-                // Actualizar existente
                 matches[editingIndex] = newMatch;
             } else {
-                // Agregar al inicio de la lista
                 matches.unshift(newMatch);
             }
 
@@ -316,7 +333,6 @@
             renderList();
         }
 
-        // Eliminar tarjeta
         function deleteItem(index) {
             if (confirm("¿Estás seguro de que deseas eliminar esta repetición?")) {
                 matches.splice(index, 1);
@@ -324,13 +340,10 @@
             }
         }
 
-        // El generador de código que evita el error de las comas
         function copyJSON() {
-            // Convierte todo lo visual en código JSON perfecto y sin errores
             const jsonText = JSON.stringify(matches, null, 2);
-            
             navigator.clipboard.writeText(jsonText).then(() => {
-                alert("✅ ¡CÓDIGO COPIADO SIN ERRORES!\n\nVe a tu repositorio de GitHub, edita el archivo 'repeticiones.json', borra todo lo que tiene, pega lo que acabas de copiar y dale a Commit changes.\n\n¡Cero problemas de comas o código roto!");
+                alert("✅ ¡CÓDIGO COPIADO CON ÉXITO!\n\nVe a tu repositorio de GitHub, edita el archivo 'repeticiones.json', borra todo lo que tiene, pega lo que acabas de copiar y dale a Commit changes.");
             }).catch(err => {
                 alert("No se pudo copiar automáticamente. Da los permisos o copia esto:\n\n" + jsonText);
             });
