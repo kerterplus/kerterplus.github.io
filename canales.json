@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "name": "Canal DASH (DRM)",
+    "logo": "https://kerterplus.com/images/1774834838174-cvjgsl.png",
+    "category": "todas",
+    "tags": "Todos, Deportes",
+    "device_type": "all",
+    "player_type": "dash",
+    "stream_url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/awxnrqkbo5/out/v1/716529a4091947b0877e6cb80dbd6ccb/cenc.mpd",
+    "drm_key1_id": "09453ce820d65fbc675de3185f9e454c",
+    "drm_key1": "98cff9600995fa381c76fdacf3c7edae"
+  },
+  {
+    "id": 2,
+    "name": "Canal HLS (Prueba)",
+    "logo": "https://kerterplus.com/images/1774834838174-cvjgsl.png",
+    "category": "todas",
+    "tags": "Todos, Noticias",
+    "device_type": "all",
+    "player_type": "hls",
+    "stream_url": "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+  }
+]
