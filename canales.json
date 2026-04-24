@@ -58,5 +58,89 @@
     "stream_url": "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/5qz8wmdome/out/v1/b9323e853dce427eac214b77bd48a204/cenc.mpd",
     "drm_key1_id": "d9623774ac5c8c351aafe97c5fe70267",
     "drm_key1": "5164e6d05164a2d65fa8fcc962aa4861"
+  },
+  {
+    "id": 9,
+    "name": "TNT SPORTS 4 UK",
+    "logo": "https://r2.thesportsdb.com/images/media/channel/logo/81twnr1689746183.png",
+    "category": "todas",
+    "tags": "Todos",
+    "device_type": "all",
+    "player_type": "dash",
+    "stream_url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/pnu10tp36z/out/v1/912e9db56d75403b8a9ac0a719110f36/cenc.mpd",
+    "drm_key1_id": "192b1115da041585c77200128549efa1",
+    "drm_key1": "634e10efe4abbb14be400a3ccbac0258"
+  },
+  {
+    "id": 8,
+    "name": "TNT SPORTS 3 UK",
+    "logo": "https://r2.thesportsdb.com/images/media/channel/logo/iwotea1701768457.png",
+    "category": "todas",
+    "tags": "Todos",
+    "device_type": "all",
+    "player_type": "dash",
+    "stream_url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/5sxuux529k/out/v1/bb548a3626cd4708afbb94a58d71dce9/cenc.mpd",
+    "drm_key1_id": "1d96ab366bbe6451edf7407b58e2fa16",
+    "drm_key1": "0116201f4a63ac5bf5787d2c610c41a7"
+  },
+  {
+    "id": 10,
+    "name": "TSN 4 CA",
+    "logo": "https://product-catalog-storage.s3.ca-central-1.amazonaws.com/channels/logo/TSN_4_Blackout_HD.png",
+    "category": "todas",
+    "tags": "Todos",
+    "device_type": "all",
+    "player_type": "dash",
+    "stream_url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/h9urpo3cwb/out/v1/fde190f369484bc6b6117cc16cd82a9f/cenc.mpd",
+    "drm_key1_id": "c4088f5f265f9de50cffd80bf89308b7",
+    "drm_key1": "2c4d2239d96d532b4ec2050653611003"
+  },
+  {
+    "id": 11,
+    "name": "TAP Sports",
+    "logo": "https://upload.wikimedia.org/wikipedia/en/6/6e/TAP_Sports_channel_logo.png",
+    "category": "todas",
+    "tags": "Todos",
+    "device_type": "all",
+    "player_type": "dash",
+    "stream_url": "https://qp-pldt-live-grp-11-prod.akamaized.net/out/u/dr_tapsports.mpd",
+    "drm_key1_id": "eabd2d95c89e42f2b0b0b40ce4179ea0",
+    "drm_key1": "0e7e35a07e2c12822316c0dc4873903f"
+  },
+  {
+    "id": 7,
+    "name": "TNT SPORTS 2 UK",
+    "logo": "https://r2.thesportsdb.com/images/media/channel/logo/lzqo991689746090.png",
+    "category": "todas",
+    "tags": "Todos",
+    "device_type": "all",
+    "player_type": "dash",
+    "stream_url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/fb6jy4pxts/out/v1/f8fa17f087564f51aa4d5c700be43ec4/cenc.mpd",
+    "drm_key1_id": "f288380ca4cef9ad3f27a92a08e9bb8b",
+    "drm_key1": "9f18d26291d9230833501f7f822f6875"
+  },
+  {
+    "id": 12,
+    "name": "LaLiga TV UK",
+    "logo": "https://kerterplus.com/images/1777050932180-lrhm7e.webp",
+    "category": "todas",
+    "tags": "Todos",
+    "device_type": "all",
+    "player_type": "dash",
+    "stream_url": "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/k0duzgfejg/out/v1/70a50b1bda944628b8e7e66ab4069419/cenc.mpd",
+    "drm_key1_id": "620e51b82596475517a27aa425c52280",
+    "drm_key1": "2b9ba811e9c5aeafc8ae1b71cdca4d6a"
+  },
+  {
+    "id": 6,
+    "name": "TNT SPORTS 1 UK",
+    "logo": "https://r2.thesportsdb.com/images/media/channel/logo/153ikz1689746051.png",
+    "category": "todas",
+    "tags": "Todos",
+    "device_type": "all",
+    "player_type": "dash",
+    "stream_url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/cllekigzzn/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd",
+    "drm_key1_id": "294b5761cefc22d0c6312939e13d8278",
+    "drm_key1": "52148f1042d238849f0a7813f1da8a7b"
   }
 ]
