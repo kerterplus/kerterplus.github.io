@@ -142,5 +142,17 @@
     "stream_url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/cllekigzzn/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd",
     "drm_key1_id": "294b5761cefc22d0c6312939e13d8278",
     "drm_key1": "52148f1042d238849f0a7813f1da8a7b"
+  },
+  {
+    "id": 13,
+    "name": "TSN 2 CA",
+    "logo": "https://r2.thesportsdb.com/images/media/channel/logo/sutruq1433379787.png",
+    "category": "todas",
+    "tags": "Todos",
+    "device_type": "all",
+    "player_type": "dash",
+    "stream_url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/3n6slkgh54/out/v1/8977baf175da4b94873194613dd3fe55/cenc.mpd",
+    "drm_key1_id": "daa8ea92553fd16cd6bfae2b8c582715",
+    "drm_key1": "4042e041b5639b79b69ae07a872eef9b"
   }
 ]
