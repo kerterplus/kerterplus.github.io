@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "FS2",
-    "logo": "https://kerterplus.com/images/1774834838174-cvjgsl.png",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/FS2_logo_2015.svg/1280px-FS2_logo_2015.svg.png",
     "category": "todas",
     "tags": "Todos, General",
     "device_type": "all",
@@ -14,7 +14,7 @@
   {
     "id": 2,
     "name": "FOX DEPORTES",
-    "logo": "https://kerterplus.com/images/1774834838174-cvjgsl.png",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3b/FOX_Deportes_logo.png",
     "category": "todas",
     "tags": "Todos, Deportes",
     "device_type": "all",
@@ -22,5 +22,41 @@
     "stream_url": "https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/vkpoljjpkj/out/v1/502bcf68b3514cd28a220e6f0a43816f/cenc.mpd",
     "drm_key1_id": "d1a163914db8ffad2c3e94f979896a0d",
     "drm_key1": "9728800a3959aafdd5b0bcfbf3768811"
+  },
+  {
+    "id": 3,
+    "name": "SportDigital Fussball",
+    "logo": "https://r2.thesportsdb.com/images/media/channel/logo/m6qkm51712223494.png",
+    "category": "todas",
+    "tags": "Todos",
+    "device_type": "all",
+    "player_type": "dash",
+    "stream_url": "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/ssdefyhkkr/out/v1/cf01290cb7f64525bdf861580a016ca8/cenc.mpd",
+    "drm_key1_id": "0ad4080cdff8c60b1233b22087f0b340",
+    "drm_key1": "285f129c5eca01dd08a5d5a14ad801c8"
+  },
+  {
+    "id": 4,
+    "name": "beiN SPORTS 3 - AQ",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Logo_bein_sports_3.png",
+    "category": "todas",
+    "tags": "Todos",
+    "device_type": "all",
+    "player_type": "dash",
+    "stream_url": "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/q4u5nwaogz/out/v1/18de6d3e65934f3a8de4358e69eab86c/cenc.mpd",
+    "drm_key1_id": "7995c724a13748ed970840a8ab5bb9b3",
+    "drm_key1": "67bdaf1e2175b9ff682fcdf0e2354b1e"
+  },
+  {
+    "id": 5,
+    "name": "CBS GOLAZO NETWORK",
+    "logo": "https://www.sportsvideo.org/wp-content/uploads/2023/09/image003.png",
+    "category": "todas",
+    "tags": "Todos",
+    "device_type": "all",
+    "player_type": "dash",
+    "stream_url": "https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/5qz8wmdome/out/v1/b9323e853dce427eac214b77bd48a204/cenc.mpd",
+    "drm_key1_id": "d9623774ac5c8c351aafe97c5fe70267",
+    "drm_key1": "5164e6d05164a2d65fa8fcc962aa4861"
   }
 ]
